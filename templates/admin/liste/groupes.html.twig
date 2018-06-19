@@ -1,0 +1,26 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block main %}
+<div class="col-lg-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <td colspan="2">Liste des groupe pour la promotion {{ groupes[0].promotion.getAnneeDebut() }} - {{ groupes[0].promotion.getAnneeFin() }}</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for groupe in groupes %}
+            <tr>
+                <td rowspan="{{ groupe.getTaille() }}">{{ groupe.getNom() }}</td>
+                <td>
+                {% for etudiant in groupe.getEtudiants() %}
+                    {{ etudiant.getPrenom() }} {{ etudiant.getNom() }}
+                    <br/>
+                {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

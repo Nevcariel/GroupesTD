@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Groupes TD{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            <nav class="navbar  navbar-dark  bg-dark">
+                <a class="navbar-brand col-lg-3 pt-10" href="{{ path('admin_homepage') }}">Panneau d'administration</a>
+            </nav>
+        {% endblock %}
+
+        
+            <div class="container-fluid">
+            <div class="row">
+                {% block aside %}
+                <nav class="col-lg-2  bg-light sidebar" style="height: 100%">
+                <div class="sidebar-sticky">
+                    <h3>Tables</h3>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_homepage') }}">
+                                Matières
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Etudiants
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Enseignants
+                            </a>
+                        </li>
+                    </ul>
+                    <hr/>
+                    <h3>Groupes</h3>
+                    <ul class="nav flex-column">
+                    {% for promotion in promotions %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ path('admin_liste_groupe', {'promotion' : promotion.getId()}) }}">
+                                {{ promotion.getAnneeDebut}} - {{ promotion.getAnneeFin}}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    <hr/>
+                </div>
+                </nav>
+                {% endblock %}
+                {% block main %}
+                 <div class="col-lg-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td colspan="4">Liste des tables</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Matières</td>
+                                <td><a href="#" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
+                                <td colspan="2"><a href="{{ path('admin_liste_matieres') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
+                            </tr>
+                            <tr>
+                                <td>Etudiants</td>
+                                <td><a href="#" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
+                                <td><a href="#" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
+                                <td><a href="#" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i> Importer un fichier</a></td>
+                            </tr>
+                            <tr>
+                                <td>Enseignants</td>
+                                <td><a href="#" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
+                                <td colspan="2"><a href="#" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% endblock %}

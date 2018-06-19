@@ -1,0 +1,23 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Admin-Modification d'une matière{% endblock %}
+
+
+{% block main %}
+    <div class="col-lg-6">
+        {{ form_start(matiereForm) }}
+            {{ form_label(matiereForm.intitule, 'Intitulé de la matière :') }}
+            {{ form_widget(matiereForm.intitule) }}
+
+            {{ form_label(matiereForm.description, 'Description :') }}
+            {{ form_widget(matiereForm.description) }}
+
+            {{ form_row(matiereForm.enseignants, {label_attr: {class: 'checkbox-custom'} }) }}
+            <div class="row">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
+        {{ form_end(matiereForm) }}
+        <a href="{{ path('admin_liste_matieres') }}" class="btn btn-secondary" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> Retour</a>
+        </div>
+    </div>
+    
+{% endblock %}

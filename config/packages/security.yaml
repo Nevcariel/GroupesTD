@@ -1,11 +1,24 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    #providers:
+    #    in_memory: { memory: ~ }
     providers:
-        in_memory: { memory: ~ }
+        in_memory:
+            memory:
+                users:
+                    g21707397:
+                        password:
+                        roles: 'ROLE_ADMIN'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        l3_firewall:
+            pattern: ^/
+            security: true
+            cas: true # Activation du CAS
+
         main:
             anonymous: true
 
