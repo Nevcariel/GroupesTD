@@ -32,11 +32,6 @@ class Etudiant
     private $prenom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Bac", inversedBy="etudiants")
-     */
-    private $bac;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $classement;
@@ -50,6 +45,11 @@ class Etudiant
      * @ORM\ManyToOne(targetEntity="App\Entity\Promotion", inversedBy="etudiants")
      */
     private $promotion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bac", inversedBy="etudiants")
+     */
+    private $bac;
 
 
     public function __toString(): ?string
@@ -99,18 +99,6 @@ class Etudiant
         return $this;
     }
 
-    public function getBac(): ?Bac
-    {
-        return $this->bac;
-    }
-
-    public function setBac(?Bac $bac): self
-    {
-        $this->bac = $bac;
-
-        return $this;
-    }
-
     public function getClassement(): ?int
     {
         return $this->classement;
@@ -143,6 +131,18 @@ class Etudiant
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    public function getBac(): ?Bac
+    {
+        return $this->bac;
+    }
+
+    public function setBac(?Bac $bac): self
+    {
+        $this->bac = $bac;
 
         return $this;
     }

@@ -1,7 +1,11 @@
 vich_uploader:
     db_driver: orm
 
-    #mappings:
-    #    products:
-    #        uri_prefix: /images/products
-    #        upload_destination: '%kernel.project_dir%/public/images/products'
+    mappings:
+        upload_csv:
+            uri_prefix: /admin/csv/upload
+            upload_destination: '%kernel.project_dir%/public/csv/upload'
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

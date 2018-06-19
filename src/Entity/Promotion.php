@@ -38,10 +38,16 @@ class Promotion
      */
     private $etudiants;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Csv", mappedBy="promotion")
+     */
+    private $csvs;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
         $this->groupes = new ArrayCollection();
+        $this->csvs = new ArrayCollection();
     }
 
     public function __toString(): ?string
@@ -63,18 +69,6 @@ class Promotion
     public function setAnneeDebut(int $anneeDebut): self
     {
         $this->anneeDebut = $anneeDebut;
-
-        return $this;
-    }
-
-    public function getanneeFin(): ?int
-    {
-        return $this->anneeFin;
-    }
-
-    public function setanneeFin(int $anneeFin): self
-    {
-        $this->anneeFin = $anneeFin;
 
         return $this;
     }
@@ -135,6 +129,49 @@ class Promotion
             // set the owning side to null (unless already changed)
             if ($etudiant->getPromotion() === $this) {
                 $etudiant->setPromotion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAnneeFin(): ?int
+    {
+        return $this->anneeFin;
+    }
+
+    public function setAnneeFin(int $anneeFin): self
+    {
+        $this->anneeFin = $anneeFin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Csv[]
+     */
+    public function getCsvs(): Collection
+    {
+        return $this->csvs;
+    }
+
+    public function addCsv(Csv $csv): self
+    {
+        if (!$this->csvs->contains($csv)) {
+            $this->csvs[] = $csv;
+            $csv->setPromotion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCsv(Csv $csv): self
+    {
+        if ($this->csvs->contains($csv)) {
+            $this->csvs->removeElement($csv);
+            // set the owning side to null (unless already changed)
+            if ($csv->getPromotion() === $this) {
+                $csv->setPromotion(null);
             }
         }
 
