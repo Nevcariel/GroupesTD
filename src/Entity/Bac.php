@@ -38,6 +38,11 @@ class Bac
         $this->etudiants = new ArrayCollection();
     }
 
+    public function __toString(): ?string
+    {
+        return $this->abreviation;
+    }
+
     public function getId()
     {
         return $this->id;

@@ -41,6 +41,18 @@ class Etudiant
      */
     private $classement;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
+
+
+    public function __toString(): ?string
+    {
+        $res = $this->prenom . $this->nom;
+        return $res;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -102,6 +114,18 @@ class Etudiant
     public function setClassement(?int $classement): self
     {
         $this->classement = $classement;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
