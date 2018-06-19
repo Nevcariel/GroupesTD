@@ -46,6 +46,11 @@ class Etudiant
      */
     private $username;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Promotion", inversedBy="etudiants")
+     */
+    private $promotion;
+
 
     public function __toString(): ?string
     {
@@ -126,6 +131,18 @@ class Etudiant
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }

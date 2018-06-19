@@ -1,6 +1,10 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+admin:
+  path: /admin
+  controller: App\Controller\AdminController::dashboard
+
 l3_logout:
   path:     /logout
   defaults: { _controller: L3CasBundle:Logout:logout }
