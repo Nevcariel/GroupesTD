@@ -119,28 +119,34 @@ class AdminController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $promotions = $entityManager->getRepository(Promotion::class)->findAll();
         $promotion = new Promotion();
+        $promoForm = $this->createForm(PromotionType::class, $promotion);
         $csv = new Csv();
-        $csvForm = $this->createForm(CsvType::class, [$csv, $promotion]);
+        $csvForm = $this->createForm(CsvType::class, $csv);
+
+        $promoForm->handleRequest($request);
 
         $csvForm->handleRequest($request);
 
-        if($csvForm->isSubmitted() && $csvForm->isValid())
+        if($promoForm->isSubmitted() && $promoForm->isValid())
         {
-            $entityManager->persist($promotion);
+            if($csvForm->isSubmitted() && $csvForm->isValid())
+            {
+                $entityManager->persist($promotion);
 
-            $csv->setPromotion($promotion);
-            $csv->setCsvName($promotion->getAnneeDebut() . "/" . $promotion->getAnneeFin());
-            $csv->setCsvSize(filesize($csv->getCsvFile()));
-            $csv->setUpdatedAt(new \DateTime('now'));
+                $csv->setPromotion($promotion);
+                $csv->setName($promotion->getAnneeDebut() . "/" . $promotion->getAnneeFin());
+                $csv->setUpdatedAt(new \DateTime('now'));
 
-            $entityManager->persist($csv);
-            $entityManager->flush();
+                $entityManager->persist($csv);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('admin_liste_matieres');
+                return $this->redirectToRoute('admin_liste_matieres');
+            }
         }
 
         return $this->render('admin/upload/csv.html.twig', array(
             'promotions' => $promotions,
+            'promoForm' => $promoForm->createView(),
             'csvForm' => $csvForm->createView(),
         ));
     }

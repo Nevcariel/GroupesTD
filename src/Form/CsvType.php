@@ -14,8 +14,6 @@ class CsvType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('anneeDebut');
-        $builder->add('anneeFin');
         $builder->add('csvFile', FileType::class);
     }
 

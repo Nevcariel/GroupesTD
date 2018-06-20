@@ -8,8 +8,7 @@ use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @Vich\Uploadable
+ * @ORM\Entity(repositoryClass="App\Repository\CsvRepository")
  */
 class Csv
 {
