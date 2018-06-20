@@ -5,17 +5,12 @@
 
 {% block main %}
     <div class="col-lg-6">
-        {{ form_start(promoForm) }}
-            {{ form_widget(promoForm)}}
-            {{ form_start(csvForm) }}
-                <div class="form-control-file">
-                    {{ form_widget(csvForm) }}
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Importer</button>
-            {{ form_end(csvForm) }}
-
-            
-        {{ form_end(promoForm) }}
+        {{ form_start(csvForm) }}
+            <div class="form-control-file">
+                {{ form_widget(csvForm) }}
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Importer</button>
+        {{ form_end(csvForm) }}
         <a href="{{ path('admin_liste_matieres') }}" class="btn btn-secondary" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> Retour</a>
         </div>
     </div>
