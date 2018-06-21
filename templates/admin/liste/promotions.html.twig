@@ -1,0 +1,21 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Admin - Liste des promotions{% endblock %}
+
+
+{% block main %}
+
+        <div class="col-lg-3">
+            <div class="list-group mt-3">
+                {% if promotions != null %}
+                    <li class="list-group-item list-group-item-secondary">Selectionner un promotion pour voir les étudiants</li>
+                    {% for promotion in promotions %}
+                        <a href="{{ path('admin_liste_etudiants', {'promo': promotion.getId()}) }}" class="list-group-item list-group-item-action">{{ promotion }}</a>
+                    {% endfor %}
+                {% else %}
+                    <li class="list-group-item list-group-item-secondary">Aucune promotion</li>
+                        <a href="{{ path('admin_create_promo') }}" class="list-group-item list-group-item-action">Créer une nouvelle promotion</a>
+                {% endif %}
+            </div>
+        </div>
+{% endblock %}

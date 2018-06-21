@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EtudiantRepository")
  */
-class Etudiant
+class Etudiant implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -50,6 +51,21 @@ class Etudiant
      * @ORM\ManyToOne(targetEntity="App\Entity\Bac", inversedBy="etudiants")
      */
     private $bac;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groupe", inversedBy="etudiants")
+     */
+    private $groupe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Matiere", inversedBy="etudiantsPrincipal")
+     */
+    private $voeuPrincipal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Matiere", inversedBy="etudiantsSecondaire")
+     */
+    private $voeuSecondaire;
 
 
     public function __toString(): ?string
@@ -131,7 +147,9 @@ class Etudiant
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
-
+        if (!$promotion->getEtudiants()->contains($this)) {
+            $promotion->addEtudiant($this);
+        }
         return $this;
     }
 
@@ -143,7 +161,41 @@ class Etudiant
     public function setBac(?Bac $bac): self
     {
         $this->bac = $bac;
-
+        if (!$bac->getEtudiants()->contains($this)) {
+            $bac->addEtudiant($this);
+        }
         return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Groupe $groupe): self
+    {
+        $this->groupe = $groupe;
+        if (!$groupe->getEtudiants()->contains($this)) {
+            $groupe->addEtudiant($this);
+        }
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+    public function getRoles()
+    {
+        return array('ROLE_ETUDIANT');
+    }
+    public function getPassword()
+    {
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
     }
 }

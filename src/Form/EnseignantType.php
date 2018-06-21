@@ -6,26 +6,28 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use App\Entity\Promotion;
+use App\Entity\Enseignant;
 
 
-class PromotionType extends AbstractType
+class EnseignantType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('anneeDebut', IntegerType::class, array(
-            'data' => 20,
-        )); 
-        $builder->add('anneeFin', IntegerType::class, array(
-            'data' => 20,
+        $builder->add('nom', TextType::class, array(
+            'label' => 'Nom*'
+        ));
+        $builder->add('prenom', TextType::class, array(
+            'label' => 'Prénom*'
+        ));
+        $builder->add('entreprise', TextType::class, array(
+            'required' => false,
         ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Promotion::class,
+            'data_class' => Enseignant::class,
         ));
     }
 }

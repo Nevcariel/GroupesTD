@@ -1,0 +1,24 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block main %}
+<div class="col-lg-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <td colspan="5">Liste des enseignants</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for enseignant in enseignants %}
+            <tr>
+                <td>{{ enseignant.getPrenom() }}</td>
+                <td>{{ enseignant.getNom() }}</td>
+                <td>{{ enseignant.getEntreprise() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+<a href="{{ path('admin_add_enseignant') }}" class="offset-lg-2 btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a>
+{% endblock %}

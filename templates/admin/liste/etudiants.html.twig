@@ -1,0 +1,29 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block main %}
+<div class="col-lg-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <td colspan="5">Liste des étudiants</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in etudiants %}
+            <tr>
+                <td>{{ etudiant.getCodeNip() }}</td>
+                <td>{{ etudiant.getPrenom() }}</td>
+                <td>{{ etudiant.getNom() }}</td>
+                <td>{{ etudiant.getUsername() }}</td>
+                <td>{{ etudiant.getBac() }}</td>
+                <td>{{ etudiant.getClassement() }}</td>
+                <td>{{ etudiant.getPromotion() }}</td>
+                <td><a href="{{ path('admin_delete_etudiant', {'etudiant': etudiant.getId()}) }}" class="offset-lg-2 btn btn-secondary btn-sm mb-3" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Supprimer</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+<a href="{{ path('admin_add_etudiant') }}" class="offset-lg-2 btn btn-secondary btn-sm mb-3" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a>
+{% endblock %}

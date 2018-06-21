@@ -24,7 +24,7 @@ class Bac
     private $intitule;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $abreviation;
 
@@ -36,6 +36,11 @@ class Bac
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
+    }
+
+    public function __toString(): ?string
+    {
+        return $this->getAbreviation();
     }
 
     public function getId()

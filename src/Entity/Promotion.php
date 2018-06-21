@@ -52,7 +52,7 @@ class Promotion
 
     public function __toString(): ?string
     {
-        $res = $this->anneeDebut . " - " . $this->anneeFin();
+        $res = $this->anneeDebut . " - " . $this->anneeFin;
         return $res;
     }
 

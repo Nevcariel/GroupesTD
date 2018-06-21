@@ -14,7 +14,7 @@ class CsvType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('csvFile', FileType::class);
+        $builder->add('file', FileType::class, array('label' => 'Fichier (.csv)'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

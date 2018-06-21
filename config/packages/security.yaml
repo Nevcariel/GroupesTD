@@ -3,21 +3,38 @@ security:
     #providers:
     #    in_memory: { memory: ~ }
     providers:
+        chain_providers:
+            chain:
+                providers: [in_memory, bdd_etudiant]
         in_memory:
             memory:
                 users:
                     g21707397:
-                        password:
                         roles: 'ROLE_ADMIN'
+        bdd_etudiant:
+            entity:
+                class: App\Entity\Etudiant
+                property: username
+
+                
+            
+        
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        admin_firewall:
+            pattern: ^/
+            security: true
+            cas: true
+            provider: in_memory
+        
         l3_firewall:
             pattern: ^/
             security: true
             cas: true # Activation du CAS
+            provider: bdd_etudiant
 
         main:
             anonymous: true
@@ -33,5 +50,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

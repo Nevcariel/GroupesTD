@@ -1,0 +1,18 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Admin-Charger un fichier CSV{% endblock %}
+
+
+{% block main %}
+
+        <div class="col-lg-3">
+            <div class="list-group mt-3">
+            <li class="list-group-item list-group-item-secondary">Choisir une promotion à mettre à jour...</li>
+            {% for promotion in promotions %}
+                <a href="{{ path('admin_upload_csv', {'promotion': promotion.getId()}) }}" class="list-group-item list-group-item-action">{{ promotion}}</a>
+            {% endfor %}
+            <li class="list-group-item list-group-item-secondary">... ou en créer une nouvelle</li>
+            <a href="{{ path('admin_create_promo') }}" class="list-group-item list-group-item-action">Créer une nouvelle promotion</a>
+            </div>
+        </div>
+{% endblock %}

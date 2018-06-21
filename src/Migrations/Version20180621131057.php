@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180620092537 extends AbstractMigration
+final class Version20180621131057 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -23,11 +23,15 @@ final class Version20180620092537 extends AbstractMigration
         $this->addSql('CREATE TABLE groupe (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, nom VARCHAR(255) NOT NULL, description CLOB DEFAULT NULL, taille INTEGER NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_4B98C21139DF194 ON groupe (promotion_id)');
         $this->addSql('CREATE TABLE bac (id INTEGER NOT NULL, intitule VARCHAR(255) DEFAULT NULL, abreviation VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_1C4FAC5886B470F8 ON bac (abreviation)');
         $this->addSql('CREATE TABLE csv (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, file VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_8A45257139DF194 ON csv (promotion_id)');
-        $this->addSql('CREATE TABLE etudiant (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, bac_id INTEGER DEFAULT NULL, code_nip VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, classement INTEGER DEFAULT NULL, username VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE etudiant (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, bac_id INTEGER DEFAULT NULL, groupe_id INTEGER DEFAULT NULL, voeu_principal_id INTEGER DEFAULT NULL, voeu_secondaire_id INTEGER DEFAULT NULL, code_nip VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, classement INTEGER DEFAULT NULL, username VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_717E22E3139DF194 ON etudiant (promotion_id)');
         $this->addSql('CREATE INDEX IDX_717E22E3E03F15C0 ON etudiant (bac_id)');
+        $this->addSql('CREATE INDEX IDX_717E22E37A45358C ON etudiant (groupe_id)');
+        $this->addSql('CREATE INDEX IDX_717E22E3B0D610FE ON etudiant (voeu_principal_id)');
+        $this->addSql('CREATE INDEX IDX_717E22E398F12918 ON etudiant (voeu_secondaire_id)');
         $this->addSql('CREATE TABLE promotion (id INTEGER NOT NULL, annee_debut INTEGER NOT NULL, annee_fin INTEGER NOT NULL, PRIMARY KEY(id))');
     }
 

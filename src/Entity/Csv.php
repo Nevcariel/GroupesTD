@@ -23,7 +23,7 @@ class Csv
      * @ORM\Column(type="string")
      *
      * @Assert\NotBlank(message="Selectionnez un fichier csv.")
-     * @Assert\File(mimeTypes={ "text/csv" })
+     * @Assert\File(mimeTypes={"text/plain"})
      */
     private $file;
 
@@ -47,6 +47,7 @@ class Csv
     public function setFile($file)
     {
         $this->file = $file;
+        return $file;
     }
 
     public function getFile()
@@ -72,6 +73,10 @@ class Csv
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
+
+        if (!$promotion->getCsvs()->contains($this)) {
+            $promotion->addCsv($this);
+        }
 
         return $this;
     }

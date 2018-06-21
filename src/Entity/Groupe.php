@@ -33,15 +33,16 @@ class Groupe
      */
     private $taille;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="groupe")
-     */
-    private $etudiants;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Promotion", inversedBy="groupes")
      */
     private $promotion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="groupe")
+     */
+    private $etudiants;
 
     public function __construct()
     {
@@ -94,6 +95,22 @@ class Groupe
         return $this;
     }
 
+
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
+        if (!$promotion->groupes->contains($this)) {
+            $promotion->addGroupe($this);
+        }
+        return $this;
+    }
+
     /**
      * @return Collection|Etudiant[]
      */
@@ -121,18 +138,6 @@ class Groupe
                 $etudiant->setGroupe(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPromotion(): ?Promotion
-    {
-        return $this->promotion;
-    }
-
-    public function setPromotion(?Promotion $promotion): self
-    {
-        $this->promotion = $promotion;
 
         return $this;
     }

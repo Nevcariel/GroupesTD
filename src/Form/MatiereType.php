@@ -18,10 +18,15 @@ class MatiereType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('intitule', TextType::class);
-        $builder->add('description', TextareaType::class);
+        $builder->add('intitule', TextType::class, array(
+            'label' => 'Intitulé de la matière*',
+        ));
+        $builder->add('description', TextareaType::class, array(
+            'label' => 'Description*',
+        ));
         $builder->add('enseignants', EntityType::class,
             array(
+                'label' => 'Enseignant(s)',
                 'class' => 'App\Entity\Enseignant',
                 'multiple' => true,
                 'expanded' => true

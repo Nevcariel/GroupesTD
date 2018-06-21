@@ -6,26 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use App\Entity\Promotion;
+use App\Entity\Bac;
 
 
-class PromotionType extends AbstractType
+class BacType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('anneeDebut', IntegerType::class, array(
-            'data' => 20,
-        )); 
-        $builder->add('anneeFin', IntegerType::class, array(
-            'data' => 20,
-        ));
+        $builder->add('intitule', TextType::class);
+        $builder->add('abreviation', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Promotion::class,
+            'data_class' => Bac::class,
         ));
     }
 }

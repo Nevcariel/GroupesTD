@@ -36,12 +36,18 @@ class Matiere
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="voeuPrincipal")
      */
-    private $etudiants;
+    private $etudiantsPrincipal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="voeuSecondaire")
+     */
+    private $etudiantsSecondaire;
 
     public function __construct()
     {
         $this->enseignants = new ArrayCollection();
-        $this->etudiants = new ArrayCollection();
+        $this->etudiantPrincipal = new ArrayCollection();
+        $this->etudiantSecondaire = new ArrayCollection();
     }
 
     public function __toString(): ?string
@@ -107,28 +113,56 @@ class Matiere
     /**
      * @return Collection|Etudiant[]
      */
-    public function getEtudiants(): Collection
+    public function getEtudiantsPrincipal(): Collection
     {
-        return $this->etudiants;
+        return $this->etudiantsPrincipal;
     }
 
-    public function addEtudiant(Etudiant $etudiant): self
+    public function addEtudiantPrincipal(Etudiant $etudiant): self
     {
-        if (!$this->etudiants->contains($etudiant)) {
-            $this->etudiants[] = $etudiant;
+        if (!$this->etudiantsPrincipal->contains($etudiant)) {
+            $this->etudiantsPrincipal[] = $etudiant;
             $etudiant->setVoeuPrincipal($this);
         }
 
         return $this;
     }
 
-    public function removeEtudiant(Etudiant $etudiant): self
+    public function removeEtudiantsPrincipal(Etudiant $etudiant): self
     {
-        if ($this->etudiants->contains($etudiant)) {
-            $this->etudiants->removeElement($etudiant);
+        if ($this->etudiantsPrincipal->contains($etudiant)) {
+            $this->etudiantsPrincipal->removeElement($etudiant);
             // set the owning side to null (unless already changed)
             if ($etudiant->getVoeuPrincipal() === $this) {
                 $etudiant->setVoeuPrincipal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEtudiantsSecondaire(): Collection
+    {
+        return $this->etudiantsSecondaire;
+    }
+
+    public function addEtudiantsSecondaire(Etudiant $etudiant): self
+    {
+        if (!$this->etudiantsSecondaire->contains($etudiant)) {
+            $this->etudiantsSecondaire[] = $etudiant;
+            $etudiant->setVoeuSecondaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtudiantsSecondaire(Etudiant $etudiant): self
+    {
+        if ($this->etudiantsSecondaire->contains($etudiant)) {
+            $this->etudiantsSecondaire->removeElement($etudiant);
+            // set the owning side to null (unless already changed)
+            if ($etudiant->getVoeuSecondaire() === $this) {
+                $etudiant->setVoeuSecondaire(null);
             }
         }
 
