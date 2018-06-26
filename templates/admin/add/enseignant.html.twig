@@ -6,14 +6,14 @@
 {% block main %}
     <div class="col-lg-6">
         {{ form_start(enseignantForm) }}
-            {{ form_row(enseignantForm.nom) }}
             {{ form_row(enseignantForm.prenom) }}
-            {{ form_row(enseignantForm) }}
+            {{ form_row(enseignantForm.nom) }}
+            {{ form_row(enseignantForm.entreprise) }}
             <div class="row">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sauvegarder</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Sauvegarder</button>
+                <a href="{{ path('admin_liste_enseignants') }}" class="btn btn-secondary" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> Retour</a>
+            </div>
         {{ form_end(enseignantForm) }}
-        <a href="{{ path('admin_liste_enseignants') }}" class="btn btn-secondary" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> Retour</a>
-        </div>
     </div>
     
 {% endblock %}

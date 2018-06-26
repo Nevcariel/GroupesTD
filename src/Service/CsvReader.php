@@ -26,24 +26,21 @@ class CsvReader
         foreach($data as $row)
         {
             $etudiant = new Etudiant();
-            $etudiant->setNom($row['nom_usuel']);
+            $etudiant->setNom($row['nom']);
             $etudiant->setPrenom($row['prenom']);
             $etudiant->setCodeNIP($row['code_nip']);
             $nom = strtolower($etudiant->getNom());
             $etudiant->setUsername($nom[0].$etudiant->getCodeNip());
-            $etudiant->setPromotion($promotion);
+            $promotion->addEtudiant($etudiant);
             if(($bac = $entityManager->getRepository(Bac::class)->findOneBy(['abreviation' => $row['bac']]))!= null)
             {
-                $etudiant->setBac($bac);
+                $bac->addEtudiant($etudiant);
             }
             else
             {
                 $bac = new Bac();
                 $bac->setAbreviation($row['bac']);
-                $entityManager->persist($bac);
-                $etudiant->setBac($bac);
-                $entityManager->persist($etudiant);
-                $entityManager->flush();
+                $bac->addEtudiant($etudiant);
             }
             
             $entityManager->persist($etudiant);

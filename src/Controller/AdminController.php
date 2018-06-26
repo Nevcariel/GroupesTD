@@ -122,6 +122,22 @@ class AdminController extends Controller
         ));
     }
 
+    /**
+    * @Route("/admin/delete/matiere/{matiere}", name="admin_delete_matiere")
+    */
+    public function deleteMatiere($matiere, Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+    
+        $record = $entityManager->getRepository(Matiere::class)->find($matiere);
+
+        $entityManager->remove($record);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_liste_matieres');
+    }
+
     /********************************* Etudiants **********************************/
 
     /**
@@ -144,11 +160,13 @@ class AdminController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotion = $entityManager->getRepository(Promotion::class)->find($promo);
         $etudiants = $entityManager->getRepository(Etudiant::class)->findBy(['promotion' => $promo]);
 
         return $this->render('admin/liste/etudiants.html.twig', array(
             'promotions' => $promotions,
             'etudiants' => $etudiants,
+            'promotion' => $promotion,
         ));
     }
 
@@ -213,16 +231,16 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/delete/{etudiant}", name="admin_delete_etudiant")
+    * @Route("/admin/delete/etudiant/{etudiant}", name="admin_delete_etudiant")
     */
     public function deleteEtudiant($etudiant, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $promotions = $entityManager->getRepository(Promotion::class)->findAll();
     
-        $et = $entityManager->getRepository(Etudiant::class)->find($etudiant);
+        $record = $entityManager->getRepository(Etudiant::class)->find($etudiant);
 
-        $entityManager->remove($et);
+        $entityManager->remove($record);
         $entityManager->flush();
 
         return $this->render('admin/dashboard.html.twig', array(
@@ -300,6 +318,22 @@ class AdminController extends Controller
             'promotions' => $promotions,
             'enseignantForm' => $enseignantForm->createView(),
         ));
+    }
+
+    /**
+    * @Route("/admin/delete/enseignant/{enseignant}", name="admin_delete_enseignant")
+    */
+    public function deleteEnseignant($enseignant, Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+    
+        $record = $entityManager->getRepository(Enseignant::class)->find($enseignant);
+
+        $entityManager->remove($record);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_liste_enseignants');
     }
 
     /**

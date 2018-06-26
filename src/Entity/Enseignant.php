@@ -34,7 +34,7 @@ class Enseignant
     private $entreprise;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Matiere", mappedBy="enseignants")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Matiere", mappedBy="enseignants", cascade={"remove", "persist"})
      */
     private $matieres;
 
@@ -45,7 +45,7 @@ class Enseignant
 
     public function __toString(): ?string
     {
-        $res = $this->prenom . $this->nom;
+        $res = $this->prenom ." ". $this->nom;
         return $res;
     }
 

@@ -29,7 +29,7 @@ class Matiere
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Enseignant", inversedBy="matieres")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Enseignant", inversedBy="matieres", cascade={"persist", "remove"})
      */
     private $enseignants;
 
@@ -146,7 +146,7 @@ class Matiere
         return $this->etudiantsSecondaire;
     }
 
-    public function addEtudiantsSecondaire(Etudiant $etudiant): self
+    public function addEtudiantSecondaire(Etudiant $etudiant): self
     {
         if (!$this->etudiantsSecondaire->contains($etudiant)) {
             $this->etudiantsSecondaire[] = $etudiant;

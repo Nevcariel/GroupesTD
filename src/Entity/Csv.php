@@ -73,11 +73,6 @@ class Csv
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
-
-        if (!$promotion->getCsvs()->contains($this)) {
-            $promotion->addCsv($this);
-        }
-
         return $this;
     }
 

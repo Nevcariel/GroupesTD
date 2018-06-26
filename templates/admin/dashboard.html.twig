@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Groupes TD{% endblock %}</title>
+        <title>{% block title %}Admin - Panneau d'administration{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -18,42 +18,42 @@
         {% endblock %}
 
         
-            <div class="container-fluid mt-1">
+        <div class="container-fluid mt-1">
             <div class="row">
                 {% block aside %}
-                <nav class="col-lg-2  bg-light sidebar" style="height: 100%">
-                <div class="sidebar-sticky">
-                    <h3>Tables</h3>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_liste_matieres') }}">
-                                Matières
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_liste_promotions') }}">
-                                Etudiants
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('admin_liste_enseignants') }}">
-                                Enseignants
-                            </a>
-                        </li>
-                    </ul>
-                    <hr/>
-                    <h3>Groupes</h3>
-                    <ul class="nav flex-column">
-                    {% for promotion in promotions %}
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ path('admin_liste_groupe', {'promotion' : promotion.getId()}) }}">
-                                {{ promotion }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                    <hr/>
-                </div>
+                <nav class="col-lg-2  bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <h3>Tables</h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_liste_matieres') }}">
+                                    Matières
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_liste_promotions') }}">
+                                    Etudiants
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_liste_enseignants') }}">
+                                    Enseignants
+                                </a>
+                            </li>
+                        </ul>
+                        <hr/>
+                        <h3>Groupes</h3>
+                        <ul class="nav flex-column">
+                        {% for promotion in promotions %}
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ path('admin_liste_groupe', {'promotion' : promotion.getId()}) }}">
+                                    {{ promotion }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        <hr/>
+                    </div>
                 </nav>
                 {% endblock %}
                 {% block main %}
@@ -85,3 +85,5 @@
                     </table>
                 </div>
                 {% endblock %}
+            </div>
+        </div>

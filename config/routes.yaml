@@ -7,4 +7,4 @@ admin:
 
 l3_logout:
   path:     /logout
-  defaults: { _controller: L3CasBundle:Logout:logout }
+  defaults: { _controller: L3\Bundle\CasBundle\Controller\LogoutController::logoutAction }

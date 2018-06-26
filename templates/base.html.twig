@@ -21,6 +21,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('add_groupe') }}">Créer un groupe</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('choix_voeux') }}">Saisie des voeux</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item btn-group dropleft">
@@ -35,10 +38,12 @@
                 </div>
             </nav>
         {% endblock %}
-        <main>
-        {% block main %}
+        <main> 
+            <div class="container-fluid">
+                {% block main %}
 
-        {% endblock %}
+                {% endblock %}
+            </div>
         </main>
 
         <footer>

@@ -105,9 +105,6 @@ class Groupe
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
-        if (!$promotion->groupes->contains($this)) {
-            $promotion->addGroupe($this);
-        }
         return $this;
     }
 

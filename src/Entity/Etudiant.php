@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EtudiantRepository")
@@ -59,6 +60,7 @@ class Etudiant implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Matiere", inversedBy="etudiantsPrincipal")
+     * @Assert\Expression("this.getVoeuPrincipal() != this.getVoeuSecondaire()", message="Les deux voeux doivent être différents")
      */
     private $voeuPrincipal;
 
@@ -147,9 +149,6 @@ class Etudiant implements UserInterface
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
-        if (!$promotion->getEtudiants()->contains($this)) {
-            $promotion->addEtudiant($this);
-        }
         return $this;
     }
 
@@ -161,9 +160,6 @@ class Etudiant implements UserInterface
     public function setBac(?Bac $bac): self
     {
         $this->bac = $bac;
-        if (!$bac->getEtudiants()->contains($this)) {
-            $bac->addEtudiant($this);
-        }
         return $this;
     }
 
@@ -175,9 +171,6 @@ class Etudiant implements UserInterface
     public function setGroupe(?Groupe $groupe): self
     {
         $this->groupe = $groupe;
-        if (!$groupe->getEtudiants()->contains($this)) {
-            $groupe->addEtudiant($this);
-        }
         return $this;
     }
 
@@ -197,5 +190,27 @@ class Etudiant implements UserInterface
         // you *may* need a real salt depending on your encoder
         // see section on salt below
         return null;
+    }
+
+    public function getVoeuPrincipal(): ?Matiere
+    {
+        return $this->voeuPrincipal;
+    }
+
+    public function setVoeuPrincipal(?Matiere $matiere): self
+    {
+        $this->voeuPrincipal = $matiere;
+        return $this;
+    }
+
+    public function getVoeuSecondaire(): ?Matiere
+    {
+        return $this->voeuSecondaire;
+    }
+
+    public function setVoeuSecondaire(?Matiere $matiere): self
+    {
+        $this->voeuSecondaire = $matiere;
+        return $this;
     }
 }

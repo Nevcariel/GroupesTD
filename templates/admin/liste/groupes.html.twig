@@ -1,11 +1,15 @@
 {% extends 'admin/dashboard.html.twig' %}
 
+{% block title %}Admin - Liste des groupes {{ promo }}{% endblock %}
+
 {% block main %}
-<div class="col-lg-6">
+<div class="col-lg">
+    <h3>Liste des groupe pour la promotion {{ promo }}</h3>
     <table class="table">
-        <thead>
+        <thead class="thead-light">
             <tr>
-                <td colspan="2">Liste des groupe pour la promotion {{ promo }}</td>
+                <th>Nom du groupe</th>
+                <th>Etudiants</th>
             </tr>
         </thead>
         <tbody>

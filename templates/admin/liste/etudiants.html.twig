@@ -1,11 +1,21 @@
 {% extends 'admin/dashboard.html.twig' %}
 
+{% block title %}Admin - Liste des étudiants {{ promotion }}{% endblock %}
+
 {% block main %}
-<div class="col-lg-6">
+<div class="col-lg mt-3">
+    <h3>Liste des étudiants {{ promotion }}</h3>
     <table class="table">
-        <thead>
+        <thead class="thead-light">
             <tr>
-                <td colspan="5">Liste des étudiants</td>
+                <th>Code NIP</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Identifiant</th>
+                <th>Bac</th>
+                <th>Classement</th>
+                <th>Promotion</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +28,9 @@
                 <td>{{ etudiant.getBac() }}</td>
                 <td>{{ etudiant.getClassement() }}</td>
                 <td>{{ etudiant.getPromotion() }}</td>
-                <td><a href="{{ path('admin_delete_etudiant', {'etudiant': etudiant.getId()}) }}" class="offset-lg-2 btn btn-secondary btn-sm mb-3" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Supprimer</a></td>
+                <td>{{ etudiant.getVoeuPrincipal() }}</td>
+                <td>{{ etudiant.getVoeuSecondaire() }}</td>
+                <td><a href="{{ path('admin_delete_etudiant', {'etudiant': etudiant.getId()}) }}" class="offset-lg-2 btn btn-danger btn-sm" role="button" aria-pressed="true" onclick="return confirm('Veuillez confirmer la suppression.')"><i class="fas fa-trash"></i> Supprimer</a></td>
             </tr>
         {% endfor %}
         </tbody>

@@ -27,7 +27,7 @@ class MatiereType extends AbstractType
         $builder->add('enseignants', EntityType::class,
             array(
                 'label' => 'Enseignant(s)',
-                'class' => 'App\Entity\Enseignant',
+                'class' => Enseignant::class,
                 'multiple' => true,
                 'expanded' => true
             ));
