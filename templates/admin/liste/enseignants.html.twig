@@ -20,6 +20,7 @@
                 <td>{{ enseignant.getPrenom() }}</td>
                 <td>{{ enseignant.getNom() }}</td>
                 <td>{{ enseignant.getEntreprise() }}</td>
+                <td><a href="{{ path('admin_edit_enseignant', {'enseignant': enseignant.getId()}) }}" class="offset-lg-2 btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Modifier</a></td>
                 <td><a href="{{ path('admin_delete_enseignant', {'enseignant': enseignant.getId()}) }}" class="offset-lg-2 btn btn-danger btn-sm" role="button" aria-pressed="true" onclick="return confirm('Veuillez confirmer la suppression.')"><i class="fas fa-trash"></i> Supprimer</a></td>
             </tr>
         {% endfor %}

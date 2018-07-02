@@ -7,15 +7,13 @@
 
         <div class="col-lg-3">
             <div class="list-group mt-3">
-                {% if promotions != null %}
-                    <li class="list-group-item list-group-item-secondary">Selectionner un promotion pour voir les étudiants</li>
-                    {% for promotion in promotions %}
-                        <a href="{{ path('admin_liste_etudiants', {'promo': promotion.getId()}) }}" class="list-group-item list-group-item-action">{{ promotion }}</a>
-                    {% endfor %}
-                {% else %}
-                    <li class="list-group-item list-group-item-secondary">Aucune promotion</li>
-                        <a href="{{ path('admin_create_promo') }}" class="list-group-item list-group-item-action">Créer une nouvelle promotion</a>
-                {% endif %}
+                <li class="list-group-item list-group-item-secondary">Selectionner un promotion pour voir les étudiants</li>
+                {% for promotion in promotions %}
+                    <a href="{{ path('admin_liste_etudiants', {'promo': promotion.getId()}) }}" class="list-group-item list-group-item-action">{{ promotion }}</a>
+                {% endfor %}
+                <a href="{{ path('admin_add_promotion') }}" class="btn btn-secondary btn-lg" role="button" aria-pressed="true"><i class="fas fa-upload"></i> Importer une nouvelle promotion</a>
             </div>
         </div>
+
+
 {% endblock %}

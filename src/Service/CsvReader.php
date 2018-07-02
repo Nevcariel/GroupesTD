@@ -19,9 +19,14 @@ class CsvReader
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function importEtudiantsFromCsv($fileName, $promotion, $entityManager)
+    public function importEtudiantsFromCsv($file, $promotion, $entityManager)
     {
-        $data = $this->csvToArray($this->getTargetDirectory()."/".$fileName);
+        $data = $this->csvToArray($this->getTargetDirectory()."/".$file->getFile());
+
+        $promotion->removeCsv($file);
+        $entityManager->persist($promotion);
+        $entityManager->remove($file);
+        $entityManager->flush();
 
         foreach($data as $row)
         {
@@ -41,6 +46,8 @@ class CsvReader
                 $bac = new Bac();
                 $bac->setAbreviation($row['bac']);
                 $bac->addEtudiant($etudiant);
+                $entityManager->persist($etudiant);
+                $entityManager->flush();
             }
             
             $entityManager->persist($etudiant);
@@ -48,14 +55,25 @@ class CsvReader
         $entityManager->flush();
         
     }
-    public function updateEtudiantsFromCsv($fileName)
-    {
-        $data = csvToArray($targetDirectory."/".$fileName);
-        $entityManager = $this->getDoctrine()->getManager();
 
-        foreach($date as $row)
+    public function updateEtudiantsFromCsv($file, $promotion, $entityManager)
+    {
+        $data = $this->csvToArray($this->getTargetDirectory()."/".$file->getFile());
+
+        $promotion->removeCsv($file);
+        $entityManager->persist($promotion);
+        $entityManager->remove($file);
+        $entityManager->flush();
+
+        foreach($data as $row)
         {
-            
+            if(($etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['codeNip' => $row['code_nip']]))!= null)
+            {
+                $etudiant->setClassement($row['Rg']);
+                $etudiant->setMoyenne(floatval($row['Moy']));
+                $entityManager->persist($etudiant);
+            }
+            $entityManager->flush();
         }
         
     }
@@ -86,6 +104,7 @@ class CsvReader
             fclose($handle);
         }
         unlink($filePath);
+
         return $data;
     }
 

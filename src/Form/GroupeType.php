@@ -19,7 +19,9 @@ class GroupeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom', TextType::class);
-        $builder->add('description', TextareaType::class);
+        $builder->add('description', TextareaType::class, array(
+            'required' => false,
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

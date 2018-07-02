@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VoeuxController extends Controller
 {
     /**
-     * @Route("/voeux", name="choix_voeux")
+     * @Route("/etudiant/voeux", name="etudiant_choix_voeux")
      */
     public function voeux(Request $request)
     {
@@ -35,10 +35,10 @@ class VoeuxController extends Controller
             $entityManager->persist($voeuS);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_liste_matieres');
+            return $this->redirectToRoute('etudiant_choix_voeux');
         }
 
-        return $this->render('voeux/choice.html.twig', array(
+        return $this->render('etudiant/voeux/choix.html.twig', array(
             'matieres' => $matieres,
             'voeuForm' => $voeuForm->createView(),
         ));

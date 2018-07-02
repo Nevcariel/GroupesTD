@@ -34,7 +34,7 @@ class Etudiant implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=16, nullable=true)
      */
     private $classement;
 
@@ -49,7 +49,7 @@ class Etudiant implements UserInterface
     private $promotion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Bac", inversedBy="etudiants")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bac", inversedBy="etudiants", cascade={"persist"})
      */
     private $bac;
 
@@ -60,7 +60,7 @@ class Etudiant implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Matiere", inversedBy="etudiantsPrincipal")
-     * @Assert\Expression("this.getVoeuPrincipal() != this.getVoeuSecondaire()", message="Les deux voeux doivent être différents")
+     * @Assert\Expression("this.getVoeuPrincipal() != this.getVoeuSecondaire() or this.getVoeuPrincipal() == null", message="Les deux voeux doivent être différents")
      */
     private $voeuPrincipal;
 
@@ -69,10 +69,15 @@ class Etudiant implements UserInterface
      */
     private $voeuSecondaire;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $moyenne;
+
 
     public function __toString(): ?string
     {
-        $res = $this->prenom . $this->nom;
+        $res = $this->prenom." ".$this->nom;
         return $res;
     }
 
@@ -117,12 +122,12 @@ class Etudiant implements UserInterface
         return $this;
     }
 
-    public function getClassement(): ?int
+    public function getClassement(): ?string
     {
         return $this->classement;
     }
 
-    public function setClassement(?int $classement): self
+    public function setClassement(?string $classement): self
     {
         $this->classement = $classement;
 
@@ -211,6 +216,18 @@ class Etudiant implements UserInterface
     public function setVoeuSecondaire(?Matiere $matiere): self
     {
         $this->voeuSecondaire = $matiere;
+        return $this;
+    }
+
+    public function getMoyenne(): ?float
+    {
+        return $this->moyenne;
+    }
+
+    public function setMoyenne(?float $moyenne): self
+    {
+        $this->moyenne = $moyenne;
+
         return $this;
     }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Etudiant;
 use App\Entity\Promotion;
@@ -29,8 +29,12 @@ class EtudiantType extends AbstractType
         $builder->add('username', TextType::class, array(
             'label' => 'Identifiant*',
         ));
-        $builder->add('classement', IntegerType::class, array(
+        $builder->add('classement', TextType::class, array(
             'required' => false,
+        ));
+        $builder->add('moyenne', NumberType::class, array(
+            'required' => false,
+            'scale' => 2,
         ));
         $builder->add('promotion', EntityType::class, array(
             'label' => 'Promotion*',

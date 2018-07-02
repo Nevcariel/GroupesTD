@@ -10,7 +10,7 @@
                     <p class="text-muted">
                         Enseignant : 
                         {% for enseignant in matiere.getEnseignants() %}
-                            {{ enseignant }} {{ enseignant.getEntreprise() }}
+                            {{ enseignant }}{% if enseignant.getEntreprise() != null %} ({{ enseignant.getEntreprise() }}){% endif %}{% if loop.last %}.{% else %}, {% endif %}
                         {% endfor %}
                     </p>
                     <a href="{{ path('admin_edit_matiere', {'matiere' : matiere.getId()}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Modifier</a>

@@ -46,7 +46,7 @@
                         <ul class="nav flex-column">
                         {% for promotion in promotions %}
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ path('admin_liste_groupe', {'promotion' : promotion.getId()}) }}">
+                                <a class="nav-link active" href="{{ path('admin_liste_groupes', {'promotion' : promotion.getId()}) }}">
                                     {{ promotion }}
                                 </a>
                             </li>
@@ -74,7 +74,6 @@
                                 <td>Etudiants</td>
                                 <td><a href="{{ path('admin_add_etudiant') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
                                 <td><a href="{{ path('admin_liste_promotions') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
-                                <td><a href="{{ path('admin_upload') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i> Importer une liste</a></td>
                             </tr>
                             <tr>
                                 <td>Enseignants</td>

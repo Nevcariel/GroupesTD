@@ -4,33 +4,73 @@
 
 {% block main %}
 <div class="col-lg mt-3">
-    <h3>Liste des étudiants {{ promotion }}</h3>
+    <div class="row">
+        <div class="col-lg">
+            <h3>Liste des étudiants {{ promotion }}</h3>
+        </div>
+        <div class="col-lg">
+            <a href="{{ path('admin_import_upload_csv', {'promotion': promotion.getId()}) }}" class="offset-lg-2 btn btn-secondary btn-sm" role="button" aria-pressed="true">
+                <i class="fas fa-upload"></i>
+                Importer une liste d'étudiants
+            </a>
+        </div>
+        <div class="col-lg">
+            <a href="{{ path('admin_update_upload_csv', {'promotion': promotion.getId()}) }}" class="offset-lg-2 btn btn-secondary btn-sm" role="button" aria-pressed="true">
+                <i class="fas fa-upload"></i>
+                Mettre à jour la liste
+            </a>
+        </div>
+        <div class="col-lg">
+            <a href="{{ path('admin_liste_groupes', {'promotion': promotion.getId()}) }}" class="offset-lg-2 btn btn-secondary btn-sm" role="button" aria-pressed="true">
+                <i class="fas fa-list"></i>
+                Voir la liste des groupes
+            </a>
+        </div>
+    </div>
     <table class="table">
         <thead class="thead-light">
             <tr>
-                <th>Code NIP</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Identifiant</th>
-                <th>Bac</th>
-                <th>Classement</th>
-                <th>Promotion</th>
-                <th></th>
+                <th class="text-center"><a href="{{ path('admin_sort_table_etudiant', {'col': codeNip, 'promotion': promotion}) }}">Code NIP</a></th>// à finir !
+                <th class="text-center">Prénom</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Identifiant</th>
+                <th class="text-center">Bac</th>
+                <th class="text-center">Classement</th>
+                <th class="text-center">Moyenne</th>
+                <th class="text-center">
+                    <a href="{{ path('admin_delete_promotion', {'promotion': promotion.getId()}) }}" 
+                        class="offset-lg-2 btn btn-danger btn-sm" 
+                        role="button" 
+                        aria-pressed="true" 
+                        onclick="return confirm('Supprimer toute la promotion ? (les groupes seront également perdus)')"
+                    >
+                        <i class="fas fa-trash"></i> 
+                        Supprimer toute la promotion
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
         {% for etudiant in etudiants %}
             <tr>
-                <td>{{ etudiant.getCodeNip() }}</td>
-                <td>{{ etudiant.getPrenom() }}</td>
-                <td>{{ etudiant.getNom() }}</td>
-                <td>{{ etudiant.getUsername() }}</td>
-                <td>{{ etudiant.getBac() }}</td>
-                <td>{{ etudiant.getClassement() }}</td>
-                <td>{{ etudiant.getPromotion() }}</td>
-                <td>{{ etudiant.getVoeuPrincipal() }}</td>
-                <td>{{ etudiant.getVoeuSecondaire() }}</td>
-                <td><a href="{{ path('admin_delete_etudiant', {'etudiant': etudiant.getId()}) }}" class="offset-lg-2 btn btn-danger btn-sm" role="button" aria-pressed="true" onclick="return confirm('Veuillez confirmer la suppression.')"><i class="fas fa-trash"></i> Supprimer</a></td>
+                <td class="text-center">{{ etudiant.getCodeNip() }}</td>
+                <td class="text-center">{{ etudiant.getPrenom() }}</td>
+                <td class="text-center">{{ etudiant.getNom() }}</td>
+                <td class="text-center">{{ etudiant.getUsername() }}</td>
+                <td class="text-center">{{ etudiant.getBac() }}</td>
+                <td class="text-center">{{ etudiant.getClassement() }}</td>
+                <td class="text-center">{{ etudiant.getMoyenne() }}</td>
+                <td class="text-center">
+                    <a href="{{ path('admin_delete_etudiant', {'etudiant': etudiant.getId()}) }}" 
+                        class="offset-lg-2 btn btn-danger btn-sm" 
+                        role="button" 
+                        aria-pressed="true" 
+                        onclick="return confirm('Veuillez confirmer la suppression.')"
+                    >
+                        <i class="fas fa-trash"></i> 
+                        Supprimer
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

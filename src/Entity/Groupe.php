@@ -35,14 +35,19 @@ class Groupe
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Promotion", inversedBy="groupes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Promotion", inversedBy="groupes", cascade={"persist"})
      */
     private $promotion;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="groupe")
+     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="groupe", cascade={"persist"})
      */
     private $etudiants;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Etudiant", cascade={"persist"})
+     */
+    private $createur;
 
     public function __construct()
     {
@@ -135,6 +140,18 @@ class Groupe
                 $etudiant->setGroupe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreateur(): ?Etudiant
+    {
+        return $this->createur;
+    }
+
+    public function setCreateur(?Etudiant $createur): self
+    {
+        $this->createur = $createur;
 
         return $this;
     }

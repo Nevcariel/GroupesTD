@@ -3,7 +3,7 @@
 {% block title %}Admin - Liste des groupes {{ promo }}{% endblock %}
 
 {% block main %}
-<div class="col-lg">
+<div class="col-lg-8">
     <h3>Liste des groupe pour la promotion {{ promo }}</h3>
     <table class="table">
         <thead class="thead-light">
@@ -15,13 +15,18 @@
         <tbody>
         {% for groupe in groupes %}
             <tr>
-                <td rowspan="{{ groupe.getTaille() }}">{{ groupe.getNom() }}</td>
-                <td>
+                <td>{{ groupe.getNom() }}</td>
                 {% for etudiant in groupe.getEtudiants() %}
-                    {{ etudiant.getPrenom() }} {{ etudiant.getNom() }}
-                    <br/>
+                    {% if loop.first %}
+                        <td>{{ etudiant }}</td>
+                    {% else %}
+                        <tr>
+                            <td></td>
+                            <td>{{ etudiant }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
-                </td>
+
             </tr>
         {% endfor %}
         </tbody>

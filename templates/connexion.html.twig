@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+<div class="col-lg-4 offset-lg-4 mt-5">
+    <div class="list-group">
+        <a href="{{ path('login') }}" class="list-group-item list-group-item-action">Utilisateur CAS</a>
+        <a href="{{ path('login_professionnel') }}" class="list-group-item list-group-item-action">Autre Utilisateur</a>
+    </div>
+</div>
+{% endblock %}
+

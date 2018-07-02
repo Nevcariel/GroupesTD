@@ -29,17 +29,17 @@ class Promotion
     private $anneeFin;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Groupe", mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity="App\Entity\Groupe", mappedBy="promotion", cascade={"remove"})
      */
     private $groupes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity="App\Entity\Etudiant", mappedBy="promotion", cascade={"remove", "persist"})
      */
     private $etudiants;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Csv", mappedBy="promotion")
+     * @ORM\OneToMany(targetEntity="App\Entity\Csv", mappedBy="promotion", cascade={"remove", "persist"})
      */
     private $csvs;
 

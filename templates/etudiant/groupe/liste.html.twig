@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+        {% for groupe in groupes %}
+            <div class="col-lg-4">
+                <h2 class="table-title">{{ groupe.getNom() }}</h2>
+                <table class="table table-bordered shadow-sm mb-0 table-hover">
+                    
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for etudiant in groupe.getEtudiants() %}
+                        <tr>
+                            <td>{{ etudiant.getNom() }}</td>
+                            <td>{{ etudiant.getPrenom() }}</td>
+                            <td>
+                                {% if groupe.getCreateur() == user and etudiant == user %}
+                                    <a href="{{ path('etudiant_disband_groupe', {'groupe': groupe.getId()}) }}" 
+                                        class="btn btn-danger btn-sm" 
+                                        role="button" 
+                                        aria-pressed="true"
+                                        onclick="return confirm('Dissoudre le groupe rendra tous les étudiants qui y appartiennent orphelin !')"
+                                    >
+                                        Dissoudre
+                                    </a>
+                                {% elseif user.getGroupe() == groupe and etudiant == user %}
+                                    <a href="{{ path('etudiant_leave_groupe', {'groupe': groupe.getId()}) }}" class="btn btn-danger btn-sm" role="button" aria-pressed="true">Quitter</a>
+                                {% elseif groupe.getCreateur() == user and etudiant != user %}
+                                    <a href="{{ path('etudiant_kick_groupe', {'groupe': groupe.getId(), 'etudiant': etudiant.getId()}) }}" 
+                                        class="btn btn-danger btn-sm" 
+                                        role="button" 
+                                        aria-pressed="true"
+                                    >
+                                        Expulser
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% if user.getGroupe() == NULL %}
+                    <a href="{{ path('etudiant_join_groupe', {'groupe': groupe.getId()}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">Rejoindre</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

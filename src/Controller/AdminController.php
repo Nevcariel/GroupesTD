@@ -29,18 +29,18 @@ class AdminController extends Controller
     public function dashboard()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         return $this->render('admin/dashboard.html.twig', array(
             'promotions' => $promotions,
         ));
     }
     /**
-     * @Route("/admin/liste/groupe/{promotion}", name="admin_liste_groupe")
+     * @Route("/admin/liste/groupe/{promotion}", name="admin_liste_groupes")
      */
     public function listeGroupes($promotion, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         $promo = $entityManager->getRepository(Promotion::class)->find($promotion);
         $groupes = $entityManager->getRepository(Groupe::class)->findBy(['promotion' => $promotion]);
 
@@ -59,7 +59,7 @@ class AdminController extends Controller
     public function listeMatieres(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         $matieres = $entityManager->getRepository(Matiere::class)->findAll();
 
         return $this->render('admin/liste/matieres.html.twig', array(
@@ -68,12 +68,12 @@ class AdminController extends Controller
         ));
     }
     /**
-    * @Route("/admin/edit/{matiere}", name="admin_edit_matiere")
+    * @Route("/admin/edit/matiere/{matiere}", name="admin_edit_matiere")
     */
     public function editMatiere($matiere, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $matiere = $entityManager->getRepository(Matiere::class)->find($matiere);
         $matiereForm = $this->createForm(MatiereType::class, $matiere);
@@ -100,7 +100,7 @@ class AdminController extends Controller
     public function addMatiere(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $matiere = new Matiere();
         $matiereForm = $this->createForm(MatiereType::class, $matiere);
@@ -128,7 +128,7 @@ class AdminController extends Controller
     public function deleteMatiere($matiere, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $record = $entityManager->getRepository(Matiere::class)->find($matiere);
 
@@ -146,7 +146,7 @@ class AdminController extends Controller
     public function listePromotions(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
 
         return $this->render('admin/liste/promotions.html.twig', array(
             'promotions' => $promotions,
@@ -159,7 +159,7 @@ class AdminController extends Controller
     public function listeEtudiants($promo, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         $promotion = $entityManager->getRepository(Promotion::class)->find($promo);
         $etudiants = $entityManager->getRepository(Etudiant::class)->findBy(['promotion' => $promo]);
 
@@ -176,7 +176,7 @@ class AdminController extends Controller
     public function editEtudiant($etudiant, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $etudiant = $entityManager->getRepository(Etudiant::class)->find($etudiant);
         $etudiantForm = $this->createForm(EtudiantType::class, $etudiant);
@@ -206,7 +206,7 @@ class AdminController extends Controller
     public function addEtudiant(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $etudiant = new Etudiant();
         $etudiantForm = $this->createForm(EtudiantType::class, $etudiant);
@@ -236,7 +236,7 @@ class AdminController extends Controller
     public function deleteEtudiant($etudiant, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $record = $entityManager->getRepository(Etudiant::class)->find($etudiant);
 
@@ -255,7 +255,7 @@ class AdminController extends Controller
     public function listEnseignants(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         $enseignants = $entityManager->getRepository(Enseignant::class)->findAll();
 
         return $this->render('admin/liste/enseignants.html.twig', array(
@@ -265,12 +265,12 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/edit/{enseignant}", name="admin_edit_enseignant")
+    * @Route("/admin/edit/enseignant/{enseignant}", name="admin_edit_enseignant")
     */
     public function editEnseignant($enseignant, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $enseignant = $entityManager->getRepository(Enseignant::class)->find($enseignant);
         $enseignantForm = $this->createForm(EnseignantType::class, $enseignant);
@@ -298,7 +298,7 @@ class AdminController extends Controller
     public function addEnseignant(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $enseignant = new Enseignant();
         $enseignantForm = $this->createForm(EnseignantType::class, $enseignant);
@@ -326,7 +326,7 @@ class AdminController extends Controller
     public function deleteEnseignant($enseignant, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
     
         $record = $entityManager->getRepository(Enseignant::class)->find($enseignant);
 
@@ -342,7 +342,7 @@ class AdminController extends Controller
     public function upload(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
 
         return $this->render('admin/upload/promo_liste.html.twig', array(
             'promotions' => $promotions,
@@ -350,12 +350,12 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/add/promotion", name="admin_create_promo")
+    * @Route("/admin/add/promotion", name="admin_add_promotion")
     */
-    public function createPromotion(Request $request)
+    public function addPromotion(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         $promotion = new Promotion();
         $promoForm = $this->createForm(PromotionType::class, $promotion);
         
@@ -367,7 +367,7 @@ class AdminController extends Controller
             $entityManager->persist($promotion);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_upload_csv', array(
+            return $this->redirectToRoute('admin_import_upload_csv', array(
                 'promotion' => $promotion->getId(),
             ));
         }
@@ -379,12 +379,29 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/upload/csv/{promotion}", name="admin_upload_csv")
+    * @Route("/admin/delete/promotion/{promotion}", name="admin_delete_promotion")
     */
-    public function uploadCsv(Promotion $promotion, Request $request, FileUploader $fileUploader)
+    public function deletePromotion($promotion, Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
+        $promo = $entityManager->getRepository(Promotion::class)->find($promotion);
+
+        $entityManager->remove($promo);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_liste_promotions', array(
+            'promotions' => $promotions,
+        ));
+    }
+
+    /**
+    * @Route("/admin/import/upload/csv/{promotion}", name="admin_import_upload_csv")
+    */
+    public function importUploadCsv(Promotion $promotion, Request $request, FileUploader $fileUploader)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
 
         $csv = new Csv();
         $csvForm = $this->createForm(CsvType::class, $csv);
@@ -418,17 +435,66 @@ class AdminController extends Controller
     public function importCsv(Promotion $promotion, Request $request, CsvReader $csvReader)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $promotions = $entityManager->getRepository(Promotion::class)->findAll();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
         $promo = $entityManager->getRepository(Promotion::class)->find($promotion);
         $file = $entityManager->getRepository(Csv::class)->findOneBy(['promotion' => $promotion]);
-        $fileName = $file->getFile();
 
-        $csvReader->importEtudiantsFromCsv($fileName, $promo, $entityManager);
+        $csvReader->importEtudiantsFromCsv($file, $promo, $entityManager);
 
-        return $this->render('admin/liste/etudiants.html.twig', array(
+        return $this->redirectToRoute('admin_liste_etudiants', array(
+            'promo' => $promo->getId(),
             'promotions' => $promotions,
-            'etudiants' => $promo->getEtudiants(),
+        ));
+    }
+
+    /**
+    * @Route("/admin/update/upload/csv/{promotion}", name="admin_update_upload_csv")
+    */
+    public function updateUploadCsv(Promotion $promotion, Request $request, FileUploader $fileUploader)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
+        $csv = new Csv();
+        $csvForm = $this->createForm(CsvType::class, $csv);
+        $csvForm->handleRequest($request);
+        
+        if($csvForm->isSubmitted() && $csvForm->isValid())
+        {
+            $file = $csv->getFile();
+            $fileName = $fileUploader->Upload($file);
+            $csv->setFile($fileName);
+            $csv->setPromotion($promotion);
+            $csv->setName($promotion->getAnneeDebut()."/".$promotion->getAnneeFin());
+            $entityManager->persist($csv);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_update_csv', array(
+                'promotion' => $promotion->getId(),
+            ));
+        }
+
+        return $this->render('admin/upload/csv.html.twig', array(
+            'promotions' => $promotions,
+            'csvForm' => $csvForm->CreateView(),
+        ));
+    }
+
+    /**
+    * @Route("/admin/update/csv/{promotion}", name="admin_update_csv")
+    */
+    public function updateCsv(Promotion $promotion, Request $request, CsvReader $csvReader)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
+        $promo = $entityManager->getRepository(Promotion::class)->find($promotion);
+        $file = $entityManager->getRepository(Csv::class)->findOneBy(['promotion' => $promo]);
+
+        $csvReader->updateEtudiantsFromCsv($file, $promo, $entityManager);
+
+        return $this->redirectToRoute('admin_liste_etudiants', array(
+            'promo' => $promo->getId(),
+            'promotions' => $promotions,
         ));
     }
 }
-

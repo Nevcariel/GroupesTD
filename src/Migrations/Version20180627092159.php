@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180621131057 extends AbstractMigration
+final class Version20180627092159 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -20,8 +20,9 @@ final class Version20180621131057 extends AbstractMigration
         $this->addSql('CREATE TABLE matiere_enseignant (matiere_id INTEGER NOT NULL, enseignant_id INTEGER NOT NULL, PRIMARY KEY(matiere_id, enseignant_id))');
         $this->addSql('CREATE INDEX IDX_536FA40FF46CD258 ON matiere_enseignant (matiere_id)');
         $this->addSql('CREATE INDEX IDX_536FA40FE455FCC0 ON matiere_enseignant (enseignant_id)');
-        $this->addSql('CREATE TABLE groupe (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, nom VARCHAR(255) NOT NULL, description CLOB DEFAULT NULL, taille INTEGER NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE groupe (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, createur_id INTEGER DEFAULT NULL, nom VARCHAR(255) NOT NULL, description CLOB DEFAULT NULL, taille INTEGER NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_4B98C21139DF194 ON groupe (promotion_id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_4B98C2173A201E5 ON groupe (createur_id)');
         $this->addSql('CREATE TABLE bac (id INTEGER NOT NULL, intitule VARCHAR(255) DEFAULT NULL, abreviation VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_1C4FAC5886B470F8 ON bac (abreviation)');
         $this->addSql('CREATE TABLE csv (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, file VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
