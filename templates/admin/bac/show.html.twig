@@ -1,0 +1,33 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Bac{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Bac</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bac.id }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ bac.intitule }}</td>
+            </tr>
+            <tr>
+                <th>Abreviation</th>
+                <td>{{ bac.abreviation }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <a href="{{ path('admin_bac_edit', {'id': bac.id}) }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+
+        {{ include('admin/bac/_delete_form.html.twig') }}
+
+        <a href="{{ path('admin_bac_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+    </div>
+</div>
+{% endblock %}

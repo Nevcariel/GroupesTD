@@ -1,0 +1,32 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Matiere{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Matiere</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ matiere.id }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ matiere.intitule }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ matiere.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_matiere_edit', {'id': matiere.id}) }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+
+    {{ include('admin/matiere/_delete_form.html.twig') }}
+
+    <a href="{{ path('admin_matiere_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+</div>
+{% endblock %}

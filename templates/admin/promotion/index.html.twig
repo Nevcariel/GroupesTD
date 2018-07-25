@@ -1,0 +1,40 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Liste des Promotions{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Liste des Promotions</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>AnneeDebut</th>
+                <th>AnneeFin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for promotion in promotions %}
+            <tr>
+                <td>{{ promotion.id }}</td>
+                <td>{{ promotion.anneeDebut }}</td>
+                <td>{{ promotion.anneeFin }}</td>
+                <td>
+                    <a href="{{ path('admin_promotion_show', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_promotion_edit', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+                    {{ include('admin/promotion/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_promotion_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+</div>
+{% endblock %}

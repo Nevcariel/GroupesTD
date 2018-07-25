@@ -26,31 +26,40 @@
                         <h3>Tables</h3>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_liste_matieres') }}">
+                                <a class="nav-link" href="{{ path('admin_matiere_index') }}">
                                     Matières
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_liste_promotions') }}">
+                                <a class="nav-link" href="{{ path('admin_etudiant_index') }}">
                                     Etudiants
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_liste_enseignants') }}">
+                                <a class="nav-link" href="{{ path('admin_enseignant_index') }}">
                                     Enseignants
                                 </a>
                             </li>
-                        </ul>
-                        <hr/>
-                        <h3>Groupes</h3>
-                        <ul class="nav flex-column">
-                        {% for promotion in promotions %}
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ path('admin_liste_groupes', {'promotion' : promotion.getId()}) }}">
-                                    {{ promotion }}
+                                <a class="nav-link" href="{{ path('admin_bac_index') }}">
+                                    Bacs
                                 </a>
                             </li>
-                        {% endfor %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_groupe_index') }}">
+                                    Groupes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_csv_index') }}">
+                                    Csvs
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_promotion_index') }}">
+                                    Promotions
+                                </a>
+                            </li>
                         </ul>
                         <hr/>
                     </div>
@@ -60,25 +69,49 @@
                  <div class="col-lg-6">
                     <table class="table">
                         <thead>
-                            <tr>
-                                <td colspan="4">Liste des tables</td>
-                            </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Matières</td>
-                                <td><a href="{{ path('admin_add_matiere') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
-                                <td colspan="2"><a href="{{ path('admin_liste_matieres') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
+                                <td>
+                                    <a href="{{ path('admin_matiere_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_matiere_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Etudiants</td>
-                                <td><a href="{{ path('admin_add_etudiant') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
-                                <td><a href="{{ path('admin_liste_promotions') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
+                                <td>
+                                    <a href="{{ path('admin_etudiant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Enseignants</td>
-                                <td><a href="{{ path('admin_add_enseignant') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Ajouter</a></td>
-                                <td colspan="2"><a href="{{ path('admin_liste_enseignants') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i> Liste</a></td>
+                                <td>
+                                    <a href="{{ path('admin_enseignant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_enseignant_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bacs</td>
+                                <td>
+                                    <a href="{{ path('admin_bac_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_bac_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Groupes</td>
+                                <td>
+                                    <a href="{{ path('admin_groupe_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_groupe_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Promotions</td>
+                                <td>
+                                    <a href="{{ path('admin_promotion_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

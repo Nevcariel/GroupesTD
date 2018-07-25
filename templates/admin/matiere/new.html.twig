@@ -1,0 +1,13 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Ajout Matiere{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Ajouter un Matiere</h1>
+
+    {{ include('admin/matiere/_form.html.twig') }}
+
+    <a href="{{ path('admin_matiere_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+</div>
+{% endblock %}

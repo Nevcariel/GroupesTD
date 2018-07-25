@@ -1,0 +1,15 @@
+{% extends 'damin/dashboard.html.twig' %}
+
+{% block title %}Mofification Csv{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Modifier un Csv</h1>
+
+    {{ include('admin/csv/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin_csv_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+
+    {{ include('admin/csv/_delete_form.html.twig') }}
+</div>
+{% endblock %}

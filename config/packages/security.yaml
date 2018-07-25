@@ -49,9 +49,6 @@ security:
         #        check_path: loginProfessionnel
         #        login_path: loginProfessionnel
 
-        #    logout:
-        #        path: security_logout
-        #        target: app_homepage
         main:
             anonymous: true
 

@@ -1,0 +1,15 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Modification Enseignant{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Modifier un Enseignant</h1>
+
+    {{ include('admin/enseignant/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin_enseignant_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+
+    {{ include('admin/enseignant/_delete_form.html.twig') }}
+</div>
+{% endblock %}

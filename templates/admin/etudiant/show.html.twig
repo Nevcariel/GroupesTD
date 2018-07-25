@@ -1,0 +1,49 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Liste des Etudiants{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Liste des Etudiants</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etudiant.id }}</td>
+            </tr>
+            <tr>
+                <th>CodeNip</th>
+                <td>{{ etudiant.codeNip }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ etudiant.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ etudiant.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Classement</th>
+                <td>{{ etudiant.classement }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ etudiant.username }}</td>
+            </tr>
+            <tr>
+                <th>Moyenne</th>
+                <td>{{ etudiant.moyenne }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('admin_etudiant_edit', {'id': etudiant.id}) }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+
+    {{ include('admin/etudiant/_delete_form.html.twig') }}
+
+    <a href="{{ path('admin_etudiant_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+</div>
+{% endblock %}

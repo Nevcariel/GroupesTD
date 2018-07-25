@@ -1,0 +1,15 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Modification Promotion{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Modifier une Promotion</h1>
+
+    {{ include('admin/promotion/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+
+    {{ include('admin/promotion/_delete_form.html.twig') }}
+</div>
+{% endblock %}

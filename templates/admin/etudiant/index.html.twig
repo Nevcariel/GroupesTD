@@ -1,0 +1,47 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Liste des Etudiants{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Liste des Etudiants</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodeNip</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Classement</th>
+                <th>Username</th>
+                <th>Moyenne</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in etudiants %}
+            <tr>
+                <td>{{ etudiant.id }}</td>
+                <td>{{ etudiant.codeNip }}</td>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>{{ etudiant.classement }}</td>
+                <td>{{ etudiant.username }}</td>
+                <td>{{ etudiant.moyenne }}</td>
+                <td>
+                    <a href="{{ path('admin_etudiant_show', {'id': etudiant.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_etudiant_edit', {'id': etudiant.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+                    {{ include('admin/etudiant/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_etudiant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+{% endblock %}

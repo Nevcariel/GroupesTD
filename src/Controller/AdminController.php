@@ -454,6 +454,7 @@ class AdminController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $promotions = $entityManager->getRepository(Promotion::class)->findAllOrdered();
+        $promo = $entityManager->getRepository(Promotion::class)->find($promotion);
         $csv = new Csv();
         $csvForm = $this->createForm(CsvType::class, $csv);
         $csvForm->handleRequest($request);
@@ -463,14 +464,14 @@ class AdminController extends Controller
             $file = $csv->getFile();
             $fileName = $fileUploader->Upload($file);
             $csv->setFile($fileName);
-            $csv->setPromotion($promotion);
-            $csv->setName($promotion->getAnneeDebut()."/".$promotion->getAnneeFin());
+            $csv->setPromotion($promo);
+            $csv->setName($promo->getAnneeDebut()."/".$promo->getAnneeFin());
             $entityManager->persist($csv);
 
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_update_csv', array(
-                'promotion' => $promotion->getId(),
+                'promotion' => $promo->getId(),
             ));
         }
 

@@ -1,0 +1,42 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Liste des Enseignants{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Liste des Enseignants</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Entreprise</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for enseignant in enseignants %}
+            <tr>
+                <td>{{ enseignant.id }}</td>
+                <td>{{ enseignant.nom }}</td>
+                <td>{{ enseignant.prenom }}</td>
+                <td>{{ enseignant.entreprise }}</td>
+                <td>
+                    <a href="{{ path('admin_enseignant_show', {'id': enseignant.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_enseignant_edit', {'id': enseignant.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+                    {{ include('admin/enseignant/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_enseignant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+</div>
+{% endblock %}

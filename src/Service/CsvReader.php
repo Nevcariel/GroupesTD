@@ -67,7 +67,8 @@ class CsvReader
 
         foreach($data as $row)
         {
-            if(($etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['codeNip' => $row['code_nip']]))!= null)
+            $etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['codeNip' => $row['code_nip'], 'promotion' => $promotion]);
+            if($etudiant)
             {
                 $etudiant->setClassement($row['Rg']);
                 $etudiant->setMoyenne(floatval($row['Moy']));

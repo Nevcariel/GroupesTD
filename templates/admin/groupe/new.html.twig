@@ -1,0 +1,13 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Ajout Groupe{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Ajouter un Groupe</h1>
+
+    {{ include('admin/groupe/_form.html.twig') }}
+
+    <a href="{{ path('admin_groupe_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+</div>
+{% endblock %}

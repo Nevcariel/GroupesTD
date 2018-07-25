@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('admin_bac_delete', {'id': bac.id}) }}" onsubmit="return confirm('Confirmer la suppression.');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bac.id) }}">
+    <button class="btn btn-danger btn-sm m-1"><i class="fas fa-trash"></i></button>
+</form>
