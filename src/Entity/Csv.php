@@ -38,6 +38,11 @@ class Csv
      */
     private $promotion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeCsv", inversedBy="csvs")
+     */
+    private $typeCsv;
+
 
     public function __construct()
     {
@@ -79,5 +84,17 @@ class Csv
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTypeCsv(): ?TypeCsv
+    {
+        return $this->typeCsv;
+    }
+
+    public function setTypeCsv(?TypeCsv $typeCsv): self
+    {
+        $this->typeCsv = $typeCsv;
+
+        return $this;
     }
 }

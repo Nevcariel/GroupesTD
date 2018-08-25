@@ -3,8 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Etudiant;
-use App\Form\Etudiant1Type;
+use App\Entity\Promotion;
+use App\Form\Admin\EtudiantType;
+use App\Form\Admin\PromotionChoiceType;
 use App\Repository\EtudiantRepository;
+use App\Repository\PromotionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +19,49 @@ use Symfony\Component\Routing\Annotation\Route;
 class EtudiantController extends Controller
 {
     /**
-     * @Route("/", name="admin_etudiant_index", methods="GET")
+     * @Route("/", name="admin_etudiant_index", methods="GET|POST")
      */
-    public function index(EtudiantRepository $etudiantRepository): Response
+    public function index(EtudiantRepository $etudiantRepository, Request $request): Response
     {
-        return $this->render('admin/etudiant/index.html.twig', ['etudiants' => $etudiantRepository->findAll()]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = new Etudiant();
+        $form = $this->createForm(PromotionChoiceType::class, $promotions);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            return $this->redirectToRoute('admin_etudiant_index_filtered', [
+                'id' => $form['promotion']->getData()->getId(),
+            ]);
+        }
+
+        return $this->render('admin/etudiant/index.html.twig', [
+            'etudiants' => $etudiantRepository->findAll(),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="admin_etudiant_index_filtered", methods="GET|POST")
+     */
+    public function filteredIndex(Request $request, Promotion $promotion): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $promotions = new Etudiant();
+        $form = $this->createForm(PromotionChoiceType::class, $promotions);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            return $this->redirectToRoute('admin_etudiant_index_filtered', [
+                'id' => $form->get('promotion')->getData()->getId(),
+            ]);
+        }
+
+        return $this->render('admin/etudiant/index.html.twig', [
+            'etudiants' => $promotion->getEtudiants(),
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -29,7 +70,7 @@ class EtudiantController extends Controller
     public function new(Request $request): Response
     {
         $etudiant = new Etudiant();
-        $form = $this->createForm(Etudiant1Type::class, $etudiant);
+        $form = $this->createForm(EtudiantType::class, $etudiant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +100,7 @@ class EtudiantController extends Controller
      */
     public function edit(Request $request, Etudiant $etudiant): Response
     {
-        $form = $this->createForm(Etudiant1Type::class, $etudiant);
+        $form = $this->createForm(EtudiantType::class, $etudiant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

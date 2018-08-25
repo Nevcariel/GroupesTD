@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Promotion;
-use App\Form\Promotion1Type;
+use App\Form\Admin\PromotionType;
 use App\Repository\PromotionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class PromotionController extends Controller
     public function new(Request $request): Response
     {
         $promotion = new Promotion();
-        $form = $this->createForm(Promotion1Type::class, $promotion);
+        $form = $this->createForm(PromotionType::class, $promotion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class PromotionController extends Controller
      */
     public function edit(Request $request, Promotion $promotion): Response
     {
-        $form = $this->createForm(Promotion1Type::class, $promotion);
+        $form = $this->createForm(PromotionType::class, $promotion);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -87,4 +87,41 @@ class PromotionController extends Controller
 
         return $this->redirectToRoute('admin_promotion_index');
     }
+
+    /**
+     * @Route("/import", name="admin_promotion_import", methods="GET|POST")
+     */
+    public function import(Request $request): Response
+    {
+        $promotion = new Promotion();
+        $form = $this->createForm(PromotionType::class, $promotion);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($promotion);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_csv_upload', [
+                'promotion' => $promotion,
+            ]);
+        }
+
+        return $this->render('admin/promotion/new.html.twig', [
+            'promotion' => $promotion,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/update/{id}", name="admin_promotion_update", methods="GET|POST")
+     */
+    public function update(Request $request, Promotion $promotion): Response
+    {
+        
+        return $this->redirectToRoute('admin_csv_upload', [
+            'promotion' => $promotion,
+        ]);
+    }
+
 }

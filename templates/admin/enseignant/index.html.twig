@@ -6,13 +6,13 @@
 <div class="col-lg mt-3">
     <h1>Liste des Enseignants</h1>
 
-    <table class="table">
+    <table class="table" id="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Entreprise</th>
+                <th class="sortable" onclick="sortNumericCol(0)">Id <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(1)">Nom <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(2)">Prenom <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(3)">Entreprise <i class="fas fa-sort"></i></th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -39,4 +39,8 @@
 
     <a href="{{ path('admin_enseignant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/tablesort.js') }}"></script>
 {% endblock %}

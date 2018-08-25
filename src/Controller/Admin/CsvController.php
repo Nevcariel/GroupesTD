@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Csv;
-use App\Form\Csv1Type;
+use App\Form\Admin\CsvType;
 use App\Repository\CsvRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class CsvController extends Controller
     public function new(Request $request): Response
     {
         $csv = new Csv();
-        $form = $this->createForm(Csv1Type::class, $csv);
+        $form = $this->createForm(CsvType::class, $csv);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class CsvController extends Controller
      */
     public function edit(Request $request, Csv $csv): Response
     {
-        $form = $this->createForm(Csv1Type::class, $csv);
+        $form = $this->createForm(CsvType::class, $csv);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

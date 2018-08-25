@@ -4,18 +4,27 @@
 
 {% block main %}
 <div class="col-lg mt-3">
-    <h1>Liste des Etudiants</h1>
-
-    <table class="table">
+    <div class="row">
+        <h1 class="col-lg">Liste des Etudiants</h1>
+        <div class="row col-lg">
+            {{ form_start(form) }}
+                {{ form_label(form.promotion) }}
+                {{ form_widget(form.promotion) }}
+                <button class="btn btn-sm m-1 btn-secondary">{{ button_label|default('Filtrer') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <table class="table" id="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th class="sortable" onclick="sortNumericCol(0)">Id <i class="fas fa-sort"></i></th>
                 <th>CodeNip</th>
-                <th>Nom</th>
-                <th>Prenom</th>
+                <th class="sortable" onclick="sortAlphaCol(2)">Nom <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(3)">Prenom <i class="fas fa-sort"></i></th>
                 <th>Classement</th>
                 <th>Username</th>
-                <th>Moyenne</th>
+                <th class="sortable" onclick="sortNumericCol(6)">Moyenne <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(7)">Promotion <i class="fas fa-sort"></i></th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -29,6 +38,7 @@
                 <td>{{ etudiant.classement }}</td>
                 <td>{{ etudiant.username }}</td>
                 <td>{{ etudiant.moyenne }}</td>
+                <td>{{ etudiant.promotion }}</td>
                 <td>
                     <a href="{{ path('admin_etudiant_show', {'id': etudiant.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
                     <a href="{{ path('admin_etudiant_edit', {'id': etudiant.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
@@ -44,4 +54,8 @@
     </table>
 
     <a href="{{ path('admin_etudiant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/tablesort.js') }}"></script>
 {% endblock %}

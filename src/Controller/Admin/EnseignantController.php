@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Enseignant;
-use App\Form\Enseignant1Type;
+use App\Form\Admin\EnseignantType;
 use App\Repository\EnseignantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class EnseignantController extends Controller
     public function new(Request $request): Response
     {
         $enseignant = new Enseignant();
-        $form = $this->createForm(Enseignant1Type::class, $enseignant);
+        $form = $this->createForm(EnseignantType::class, $enseignant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class EnseignantController extends Controller
      */
     public function edit(Request $request, Enseignant $enseignant): Response
     {
-        $form = $this->createForm(Enseignant1Type::class, $enseignant);
+        $form = $this->createForm(EnseignantType::class, $enseignant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

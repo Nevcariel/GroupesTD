@@ -52,7 +52,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('admin_csv_index') }}">
-                                    Csvs
+                                    Csv
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -82,7 +82,7 @@
                                 <td>Etudiants</td>
                                 <td>
                                     <a href="{{ path('admin_etudiant_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
-                                    <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                    <a href="{{ path('admin_etudiant_index')}}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
                                 </td>
                             </tr>
                             <tr>
@@ -111,11 +111,18 @@
                                 <td>
                                     <a href="{{ path('admin_promotion_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
                                     <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                    <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i></a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                {% endblock %}
+                {% block javascripts %}
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                    <script>window.jQuery || document.write('<script src="~/Content/js/jquery-1.11.2.min.js"><\/script>')</script>
+                    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+                    
                 {% endblock %}
             </div>
         </div>

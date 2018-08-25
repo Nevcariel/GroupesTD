@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Bac;
-use App\Form\Bac1Type;
+use App\Form\Admin\BacType;
 use App\Repository\BacRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class BacController extends Controller
     public function new(Request $request): Response
     {
         $bac = new Bac();
-        $form = $this->createForm(Bac1Type::class, $bac);
+        $form = $this->createForm(BacType::class, $bac);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class BacController extends Controller
      */
     public function edit(Request $request, Bac $bac): Response
     {
-        $form = $this->createForm(Bac1Type::class, $bac);
+        $form = $this->createForm(BacType::class, $bac);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

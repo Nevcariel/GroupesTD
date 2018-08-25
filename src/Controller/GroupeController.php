@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class OldGroupeController extends Controller
+class GroupeController extends Controller
 {
     /**
      * @Route("/etudiant/liste/groupes", name="etudiant_liste_groupes")
@@ -64,15 +64,17 @@ class OldGroupeController extends Controller
     /**
      * @Route("/etudiant/join/groupe/{groupe}", name="etudiant_join_groupe")
      */
-    public function joinGroupe($groupe)
+    public function joinGroupe(Groupe $groupe)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $etudiant = $this->getUser();
-        $groupe = $entityManager->getRepository(Groupe::class)->find($groupe);
-        $groupe->addEtudiant($etudiant);
-        $entityManager->persist($groupe);
-        $entityManager->flush();
-        
+        if(count($groupe->getEtudiants()) < $groupe->getTaille())
+        {
+            $entityManager = $this->getDoctrine()->getManager();
+            $etudiant = $this->getUser();
+            $groupe = $entityManager->getRepository(Groupe::class)->find($groupe);
+            $groupe->addEtudiant($etudiant);
+            $entityManager->persist($groupe);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute('etudiant_liste_groupes');
     }
 
@@ -109,17 +111,19 @@ class OldGroupeController extends Controller
     /**
      * @Route("/etudiant/disband/groupe/{groupe}", name="etudiant_disband_groupe")
      */
-    public function disbandGroupe($groupe)
+    public function disbandGroupe(Groupe $groupe)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $groupe = $entityManager->getRepository(Groupe::class)->find($groupe);
-        $etudiants = $groupe->getEtudiants();
-        foreach($etudiants as $etudiant)
+        if($groupe->getCreateur() == $this->getUser())
         {
-            $groupe->removeEtudiant($etudiant);
+            $entityManager = $this->getDoctrine()->getManager();
+            $etudiants = $groupe->getEtudiants();
+            foreach($etudiants as $etudiant)
+            {
+                $groupe->removeEtudiant($etudiant);
+            }
+            $entityManager->remove($groupe);
+            $entityManager->flush();
         }
-        $entityManager->remove($groupe);
-        $entityManager->flush();
         
         return $this->redirectToRoute('etudiant_liste_groupes');
     }

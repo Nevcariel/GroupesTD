@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Groupe;
-use App\Form\Groupe1Type;
+use App\Form\Admin\GroupeType;
 use App\Repository\GroupeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class GroupeController extends Controller
     public function new(Request $request): Response
     {
         $groupe = new Groupe();
-        $form = $this->createForm(Groupe1Type::class, $groupe);
+        $form = $this->createForm(GroupeType::class, $groupe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class GroupeController extends Controller
      */
     public function show(Groupe $groupe): Response
     {
-        return $this->render('groupe/show.html.twig', ['groupe' => $groupe]);
+        return $this->render('admin/groupe/show.html.twig', ['groupe' => $groupe]);
     }
 
     /**
@@ -59,7 +59,7 @@ class GroupeController extends Controller
      */
     public function edit(Request $request, Groupe $groupe): Response
     {
-        $form = $this->createForm(Groupe1Type::class, $groupe);
+        $form = $this->createForm(GroupeType::class, $groupe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

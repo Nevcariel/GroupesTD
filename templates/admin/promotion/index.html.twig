@@ -5,13 +5,15 @@
 {% block main %}
 <div class="col-lg mt-3">
     <h1>Liste des Promotions</h1>
+    <a href="{{ path('admin_promotion_import') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i> Importer une liste</a>
+    <a href="{{ path('admin_promotion_update') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i> Mettre à jour une liste</a>
 
-    <table class="table">
+    <table class="table" id="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>AnneeDebut</th>
-                <th>AnneeFin</th>
+                <th class="sortable" onclick="sortNumericCol(0)">Id <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortNumericCol(1)">Année Début <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortNumericCol(2)">Année Fin <i class="fas fa-sort"></i></th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -24,6 +26,8 @@
                 <td>
                     <a href="{{ path('admin_promotion_show', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
                     <a href="{{ path('admin_promotion_edit', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="{{ path('admin_etudiant_promotion', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list"></i></a>
+
                     {{ include('admin/promotion/_delete_form.html.twig') }}
                 </td>
             </tr>
@@ -37,4 +41,8 @@
 
     <a href="{{ path('admin_promotion_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/tablesort.js') }}"></script>
 {% endblock %}

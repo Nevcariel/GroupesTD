@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Etudiant;
 use App\Entity\Promotion;
 use App\Entity\Bac;
+use App\Entity\Groupe;
 
 
 class EtudiantType extends AbstractType
@@ -44,6 +45,11 @@ class EtudiantType extends AbstractType
         $builder->add('bac', EntityType::class, array(
             'class' => Bac::class,
             'expanded' => true,
+        ));
+        $builder->add('groupe', EntityType::class, array(
+            'class' => Groupe::class,
+            'placeholder' => 'select',
+            'required' => false,
         ));
 
     }

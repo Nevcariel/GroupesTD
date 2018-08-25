@@ -3,9 +3,11 @@
 {% block title %}Ajout Etudiant{% endblock %}
 
 {% block main %}
+<div class="col-lg mt-3">
     <h1>Ajouter un Etudiant</h1>
 
     {{ include('admin/etudiant/_form.html.twig') }}
 
     <a href="{{ path('admin_etudiant_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+</div>
 {% endblock %}

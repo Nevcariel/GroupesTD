@@ -74,6 +74,11 @@ class Etudiant implements UserInterface
      */
     private $moyenne;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $commentaire;
+
 
     public function __toString(): ?string
     {
@@ -227,6 +232,18 @@ class Etudiant implements UserInterface
     public function setMoyenne(?float $moyenne): self
     {
         $this->moyenne = $moyenne;
+
+        return $this;
+    }
+
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(?string $commentaire): self
+    {
+        $this->commentaire = $commentaire;
 
         return $this;
     }

@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Matiere;
-use App\Form\Matiere1Type;
+use App\Form\Admin\MatiereType;
 use App\Repository\MatiereRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class MatiereController extends Controller
     public function new(Request $request): Response
     {
         $matiere = new Matiere();
-        $form = $this->createForm(Matiere1Type::class, $matiere);
+        $form = $this->createForm(MatiereType::class, $matiere);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class MatiereController extends Controller
      */
     public function edit(Request $request, Matiere $matiere): Response
     {
-        $form = $this->createForm(Matiere1Type::class, $matiere);
+        $form = $this->createForm(MatiereType::class, $matiere);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

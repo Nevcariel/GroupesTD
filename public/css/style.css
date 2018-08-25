@@ -2,3 +2,7 @@
 {
     margin-top: 50px;
 }
+.sortable
+{
+    cursor: pointer
+}

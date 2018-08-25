@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('admin_etudiant_delete', {'id': etudiant.id}) }}" onsubmit="return confirm('Confirmez la suppression');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ etudiant.id) }}">
-    <button class="btn" class="btn btn-danger btn-sm m-1"><i class="fas fa-trash"></i></button>
+    <button class="btn btn-danger btn-sm m-1"><i class="fas fa-trash"></i></button>
 </form>
