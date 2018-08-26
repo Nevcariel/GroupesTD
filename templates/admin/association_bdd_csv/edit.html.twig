@@ -1,0 +1,15 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Modification Association Bdd Csv{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Modification Association Bdd Csv</h1>
+
+    {{ include('admin/association_bdd_csv/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_association_bdd_csv_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+
+    {{ include('admin/association_bdd_csv/_delete_form.html.twig') }}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin/dashboards.html.twig' %}
+
+{% block title %}Ahout Type Csv{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Ajout Type Csv</h1>
+
+    {{ include('admin/type_csv/_form.html.twig') }}
+
+    <a href="{{ path('admin_type_csv_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+</div>
+{% endblock %}

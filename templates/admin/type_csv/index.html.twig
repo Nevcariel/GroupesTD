@@ -1,0 +1,36 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Liste des Types Csv{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Liste des Types Csv</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_csv in type_csvs %}
+            <tr>
+                <td>{{ type_csv.id }}</td>
+                <td>
+                    <a href="{{ path('admin_type_csv_show', {'id': type_csv.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_type_csv_edit', {'id': type_csv.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+                    {{ include('admin/type_csv/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_type_csv_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+</div>
+{% endblock %}

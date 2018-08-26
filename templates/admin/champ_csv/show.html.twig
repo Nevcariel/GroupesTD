@@ -1,0 +1,29 @@
+{% extends 'admin/dashboard.html.twig' %}
+
+{% block title %}Champ Csv{% endblock %}
+
+{% block main %}
+<div class="col-lg mt-3">
+    <h1>Champ Csv</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ champ_csv.id }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ champ_csv.intitule }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_champ_csv_edit', {'id': champ_csv.id}) }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
+
+    {{ include('admin/champ_csv/_delete_form.html.twig') }}
+
+    <a href="{{ path('admin_champ_csv_index') }}" class="btn btn-secondary btn-sm m-1" role="button" aria-pressed="true"><i class="fas fa-arrow-left"></i> retour</a>
+
+</div>
+{% endblock %}
