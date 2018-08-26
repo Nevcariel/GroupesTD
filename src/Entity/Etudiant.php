@@ -268,7 +268,7 @@ class Etudiant implements UserInterface
             $this->setMoyenne(floatval($data));
     }
 
-    public function getSpecificField(string $field)
+    public function getSpecificField($field)
     {
         if($field == 'nom')
             return $this->nom;

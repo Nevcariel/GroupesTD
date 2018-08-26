@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-        
+    {{ form_row(form.intitule) }}
     <h4>Ajoutez des champs à lire dans le fichier csv :</h4>
     <ul class="tags list-group mb-3" data-prototype="{{ form_widget(form.champs.vars.prototype)|e('html_attr') }}">
     </ul>

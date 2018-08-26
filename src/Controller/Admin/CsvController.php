@@ -18,6 +18,7 @@ use App\Service\FileUploader;
  */
 class CsvController extends Controller
 {
+
     /**
      * @Route("/", name="admin_csv_index", methods="GET")
      */
@@ -131,6 +132,56 @@ class CsvController extends Controller
 
         return $this->redirectToRoute('admin_etudiant_index', array(
         ));
+    }
+
+    /**
+    * @Route("/export/{id}", name="admin_export_csv")
+    */
+    public function exportCsv(Promotion $promotion, Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $csv = new Csv();
+
+        $csv->setPromotion($promotion);
+        $csv->setName($promotion->getAnneeDebut().'_'.$promotion->getAnneFin());
+
+
+        return $this->redirectToRoute('admin_etudiant_index', array(
+        ));
+    }
+
+    /**
+    * @Route("/generate/{id}", name="admin_generate_csv")
+    */
+    public function generateCsv(Promotion $promotion, Request $request)
+    {
+        $champs = $csv->getTypeCsv()->getChamps();
+        $header = array();
+        $datas = array();
+        $row = array();
+        foreach($champs as $champ)
+        {
+            array_push($header, $champ->getChampCsv()->getIntitule());
+        }
+        $etudiants = $entityManager->getRepository(Etudiant::class)->findBy(['promotion' => $promotion]);
+        foreach($etudiants as $etudiant)
+        {
+            foreach($champs as $champ)
+            {
+                array_push($row, getSpecificField($champ->getChampBdd->getIntitule()));
+            }
+            $datas[] = array_combine($header, $row);
+            $row = array();
+        }
+        $p = fopen($this->getTargetDirectory().'/'.$csv->getPromotion()->getAnneeDebut().'_'.$promotion->getPromotion()->getAnneeFin(), 'w');
+        foreach($datas as $data)
+        {
+            fputcsv($p, $data, ";");
+        }
+        fclose($p);
+
+        return $csv;
     }
 
     /**

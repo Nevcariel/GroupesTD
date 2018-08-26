@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Csv
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

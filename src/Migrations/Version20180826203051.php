@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180826164731 extends AbstractMigration
+final class Version20180826203051 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -16,7 +16,7 @@ final class Version20180826164731 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('CREATE TABLE enseignant (id INTEGER NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, entreprise VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE type_csv (id INTEGER NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE type_csv (id INTEGER NOT NULL, intitule VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE matiere (id INTEGER NOT NULL, intitule VARCHAR(255) NOT NULL, description CLOB NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE matiere_enseignant (matiere_id INTEGER NOT NULL, enseignant_id INTEGER NOT NULL, PRIMARY KEY(matiere_id, enseignant_id))');
         $this->addSql('CREATE INDEX IDX_536FA40FF46CD258 ON matiere_enseignant (matiere_id)');

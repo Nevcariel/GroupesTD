@@ -28,6 +28,11 @@ class TypeCsv
      */
     private $champs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $intitule;
+
     public function __construct()
     {
         $this->csvs = new ArrayCollection();
@@ -36,7 +41,7 @@ class TypeCsv
 
     public function __toString(): ?string
     {
-        return $this->id;
+        return $this->intitule;
     }
 
     public function getId()
@@ -102,6 +107,18 @@ class TypeCsv
                 $champ->setTypeCsv(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIntitule(): ?string
+    {
+        return $this->intitule;
+    }
+
+    public function setIntitule(string $intitule): self
+    {
+        $this->intitule = $intitule;
 
         return $this;
     }

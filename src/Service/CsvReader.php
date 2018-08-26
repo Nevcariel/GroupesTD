@@ -62,6 +62,14 @@ class CsvReader
                     $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $row[$champ->getChampCsv()->getIntitule()]);
                 }
             }
+            foreach($champs as $champ)
+            {
+                if($champ->getChampBdd()->getIntitule() == 'codeNip')
+                {
+                    $nom = strtolower($etudiant->getNom());
+                    $etudiant->setUsername($nom[0].$etudiant->getCodeNip());
+                }
+            }
             $entityManager->persist($etudiant);
         }
         $entityManager->flush();
@@ -89,8 +97,8 @@ class CsvReader
                 if($champ->getChampBdd()->getIntitule() == 'codeNip')
                 {
                     $codeNip = $row[$champ->getChampCsv()->getIntitule()];
-                    dump($codeNip);
                 }
+                dump($codeNip);
             }
             if(isset($codeNip))
             {
@@ -108,7 +116,7 @@ class CsvReader
             }
             else
             {
-                
+                dump($codeNip);
                 foreach($champs as $champ)
                 {  
                     if($champ->getChampBdd()->getIntitule() == 'nom')
@@ -124,6 +132,14 @@ class CsvReader
                     {
                         $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $champ->getChampCsv()->getIntitule());
                         $entityManager->persist($etudiant);
+                    }
+                }
+                foreach($champs as $champ)
+                {
+                    if($champ->getChampBdd()->getIntitule() == 'codeNip')
+                    {
+                        $nom = strtolower($etudiant->getNom());
+                        $etudiant->setUsername($nom[0].$etudiant->getCodeNip());
                     }
                 }
             }
