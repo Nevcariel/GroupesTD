@@ -1,4 +1,8 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+        
+    <p>Saisissez les réponses possibles si besoin :</p>
+    <ul class="tags list-group mb-3" data-prototype="{{ form_widget(form.champs.vars.prototype)|e('html_attr') }}">
+    </ul>
+    
     <button class="btn btn-sm m-1 btn-secondary">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

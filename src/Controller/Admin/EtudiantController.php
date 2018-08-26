@@ -42,7 +42,7 @@ class EtudiantController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="admin_etudiant_index_filtered", methods="GET|POST")
+     * @Route("/{id}/list", name="admin_etudiant_index_filtered", methods="GET|POST")
      */
     public function filteredIndex(Request $request, Promotion $promotion): Response
     {
@@ -88,7 +88,7 @@ class EtudiantController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="admin_etudiant_show", methods="GET")
+     * @Route("/{id}/show", name="admin_etudiant_show", methods="GET")
      */
     public function show(Etudiant $etudiant): Response
     {

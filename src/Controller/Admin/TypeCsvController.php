@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\TypeCsv;
-use App\Form\TypeCsvType;
+use App\Form\Admin\TypeCsvType;
 use App\Repository\TypeCsvRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

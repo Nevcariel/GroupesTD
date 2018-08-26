@@ -9,8 +9,8 @@ security:
         in_memory:
             memory:
                 users:
-                #    g21707397:
-                #        roles: 'ROLE_ADMIN'
+                    g21707397:
+                        roles: 'ROLE_ADMIN'
         bdd_etudiant:
             entity:
                 class: App\Entity\Etudiant
@@ -29,11 +29,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        #admin_firewall:
-        #    pattern: ^/admin
-        #    security: true
-        #    cas: true
-        #    provider: in_memory
+        admin_firewall:
+            pattern: ^/admin
+            security: true
+            cas: true
+            provider: in_memory
         
         etudiant_firewall:
             pattern: ^/

@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\AssociationBddCsv;
-use App\Form\AssociationBddCsvType;
+use App\Form\Admin\AssociationBddCsvType;
 use App\Repository\AssociationBddCsvRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

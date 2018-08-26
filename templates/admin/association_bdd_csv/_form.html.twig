@@ -1,4 +1,11 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-lg-3">
+            {{ form_row(form.champBdd) }}
+        </div>
+        <div class=c"ol-lg-5">
+            {{ form_row(form.champCsv) }}
+        </div>
+    </div>
     <button class="btn btn-sm m-1 btn-secondary">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ChampCsv;
-use App\Form\ChampCsvType;
+use App\Form\Admin\ChampCsvType;
 use App\Repository\ChampCsvRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ChampBDD;
-use App\Form\ChampBDDType;
+use App\Form\Admin\ChampBDDType;
 use App\Repository\ChampBDDRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

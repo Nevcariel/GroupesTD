@@ -38,6 +38,11 @@ class ChampCsv
         return $this->id;
     }
 
+    public function __toString(): ?string
+    {
+        return $this->intitule;
+    }
+
     public function getIntitule(): ?string
     {
         return $this->intitule;

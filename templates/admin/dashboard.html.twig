@@ -51,13 +51,33 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_promotion_index') }}">
+                                    Promotions
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ path('admin_csv_index') }}">
                                     Csv
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_promotion_index') }}">
-                                    Promotions
+                                <a class="nav-link" href="{{ path('admin_type_csv_index') }}">
+                                    Type Csv
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_champ_csv_index') }}">
+                                    Champ Csv
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_champ_bdd_index') }}">
+                                    Champ Bdd
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_association_bdd_csv_index') }}">
+                                    Association Bdd/Csv
                                 </a>
                             </li>
                         </ul>
@@ -112,6 +132,41 @@
                                     <a href="{{ path('admin_promotion_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
                                     <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
                                     <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Csv</td>
+                                <td>
+                                    <a href="{{ path('admin_csv_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_csv_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Type Csv</td>
+                                <td>
+                                    <a href="{{ path('admin_type_csv_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_type_csv_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Champ Csv</td>
+                                <td>
+                                    <a href="{{ path('admin_champ_csv_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_champ_csv_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Champ Bdd</td>
+                                <td>
+                                    <a href="{{ path('admin_champ_bdd_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_champ_bdd_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Association Bdd/Csv</td>
+                                <td>
+                                    <a href="{{ path('admin_association_bdd_csv_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
+                                    <a href="{{ path('admin_association_bdd_csv_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
                                 </td>
                             </tr>
                         </tbody>

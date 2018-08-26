@@ -33,6 +33,11 @@ class ChampBDD
         $this->associationsBddCsv = new ArrayCollection();
     }
 
+    public function __toString(): ?string
+    {
+        return $this->intitule;
+    }
+
     public function getId()
     {
         return $this->id;
