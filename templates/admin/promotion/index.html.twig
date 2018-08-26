@@ -5,7 +5,6 @@
 {% block main %}
 <div class="col-lg mt-3">
     <h1>Liste des Promotions</h1>
-    <a href="{{ path('admin_promotion_import') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i> Importer une liste</a>
     
 
     <table class="table" id="table">
@@ -25,8 +24,8 @@
                 <td>{{ promotion.anneeFin }}</td>
                 <td>
                     <a href="{{ path('admin_promotion_show', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
-                    <a href="{{ path('admin_promotion_edit', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="{{ path('admin_promotion_update', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i> Mettre à jour une liste</a>
+                    <a href="{{ path('admin_csv_new_import', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i> Importer une liste</a>
+                    <a href="{{ path('admin_csv_new_update', {'id': promotion.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i> Mettre à jour la liste</a>
 
                     {{ include('admin/promotion/_delete_form.html.twig') }}
                 </td>

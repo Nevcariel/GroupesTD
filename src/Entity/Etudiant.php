@@ -19,7 +19,7 @@ class Etudiant implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $codeNip;
 
@@ -39,7 +39,7 @@ class Etudiant implements UserInterface
     private $classement;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $username;
 
@@ -246,5 +246,55 @@ class Etudiant implements UserInterface
         $this->commentaire = $commentaire;
 
         return $this;
+    }
+    public function setSpecificField($field, $data)
+    {
+        if($field == 'nom')
+            $this->setNom($data);
+
+        elseif($field == 'prenom')
+            $this->setPrenom($data);
+        
+        elseif($field == 'codeNip')
+            $this->setCodeNip($data);
+
+        elseif($field == 'classement')
+            $this->setClassement($data);
+        
+        elseif($field == 'commentaire')
+            $this->setCommentaire($data);
+        
+        elseif($field == 'moyenne')
+            $this->setMoyenne(floatval($data));
+    }
+
+    public function getSpecificField(string $field)
+    {
+        if($field == 'nom')
+            return $this->nom;
+
+        elseif($field == 'prenom')
+        return $this->prenom;
+        
+        elseif($field == 'codeNip')
+            return $this->codeNip;
+
+        elseif($field == 'classement')
+            return $this->classement;
+        
+        elseif($field == 'bac')
+            return $this->bac;
+        
+        elseif($field == 'groupe')
+            return $this->groupe;
+        
+        elseif($field == 'moyenne')
+            return $this->moyenne;
+
+        elseif($field == 'voeuPrincipal')
+            return $this->voeuPrincipal;
+
+        elseif($field == 'voeuSecondaire')
+            return $this->voeuSecondaire;
     }
 }

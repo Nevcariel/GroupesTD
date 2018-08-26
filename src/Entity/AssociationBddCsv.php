@@ -19,12 +19,12 @@ class AssociationBddCsv
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ChampBDD", inversedBy="associationsBddCsv")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ChampBDD", inversedBy="associationsBddCsv", cascade={"persist"})
      */
     private $champBdd;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ChampCsv", inversedBy="associationsBddCsv")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ChampCsv", inversedBy="associationsBddCsv", cascade={"persist"})
      */
     private $champCsv;
 

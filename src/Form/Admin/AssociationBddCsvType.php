@@ -5,10 +5,10 @@ namespace App\Form\Admin;
 use App\Entity\AssociationBddCsv;
 use App\Entity\ChampBDD;
 use App\Entity\ChampCsv;
+use App\Form\Admin\ChampCsvType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
@@ -21,8 +21,8 @@ class AssociationBddCsvType extends AbstractType
                 'class' => ChampBDD::class,
                 'label' => 'Nom du champ dans la base de données',
             ])
-            ->add('champCsv', TextType::class, [
-                'label' => 'Nom du champ dans le fichier csv',
+            ->add('champCsv', ChampCsvType::class, [
+                'label' => false,
             ])
         ;
     }

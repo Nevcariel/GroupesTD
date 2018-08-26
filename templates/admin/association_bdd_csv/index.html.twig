@@ -10,6 +10,9 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Champ Bdd</th>
+                <th>Champ csv</th>
+                <th>Type Csv</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,6 +20,9 @@
         {% for association_bdd_csv in association_bdd_csvs %}
             <tr>
                 <td>{{ association_bdd_csv.id }}</td>
+                <td>{{ association_bdd_csv.champBdd }}</td>
+                <td>{{ association_bdd_csv.champCsv }}</td>
+                <td>{{ association_bdd_csv.typeCsv }}</td>
                 <td>
                     <a href="{{ path('admin_association_bdd_csv_show', {'id': association_bdd_csv.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i>
                     <a href="{{ path('admin_association_bdd_csv_edit', {'id': association_bdd_csv.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>

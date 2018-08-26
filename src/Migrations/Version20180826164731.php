@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180826132826 extends AbstractMigration
+final class Version20180826164731 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -34,7 +34,7 @@ final class Version20180826132826 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_D44B1A6820000D33 ON association_bdd_csv (champ_bdd_id)');
         $this->addSql('CREATE INDEX IDX_D44B1A68C38C0A10 ON association_bdd_csv (champ_csv_id)');
         $this->addSql('CREATE INDEX IDX_D44B1A687553CE12 ON association_bdd_csv (type_csv_id)');
-        $this->addSql('CREATE TABLE etudiant (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, bac_id INTEGER DEFAULT NULL, groupe_id INTEGER DEFAULT NULL, voeu_principal_id INTEGER DEFAULT NULL, voeu_secondaire_id INTEGER DEFAULT NULL, code_nip VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, classement VARCHAR(16) DEFAULT NULL, username VARCHAR(255) NOT NULL, moyenne DOUBLE PRECISION DEFAULT NULL, commentaire CLOB DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE etudiant (id INTEGER NOT NULL, promotion_id INTEGER DEFAULT NULL, bac_id INTEGER DEFAULT NULL, groupe_id INTEGER DEFAULT NULL, voeu_principal_id INTEGER DEFAULT NULL, voeu_secondaire_id INTEGER DEFAULT NULL, code_nip VARCHAR(255) DEFAULT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, classement VARCHAR(16) DEFAULT NULL, username VARCHAR(255) DEFAULT NULL, moyenne DOUBLE PRECISION DEFAULT NULL, commentaire CLOB DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_717E22E3139DF194 ON etudiant (promotion_id)');
         $this->addSql('CREATE INDEX IDX_717E22E3E03F15C0 ON etudiant (bac_id)');
         $this->addSql('CREATE INDEX IDX_717E22E37A45358C ON etudiant (groupe_id)');

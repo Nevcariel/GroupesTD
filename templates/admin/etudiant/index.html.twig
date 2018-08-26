@@ -21,10 +21,11 @@
                 <th>CodeNip</th>
                 <th class="sortable" onclick="sortAlphaCol(2)">Nom <i class="fas fa-sort"></i></th>
                 <th class="sortable" onclick="sortAlphaCol(3)">Prenom <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(4)">Bac <i class="fas fa-sort"></i></th>
                 <th>Classement</th>
                 <th>Username</th>
-                <th class="sortable" onclick="sortNumericCol(6)">Moyenne <i class="fas fa-sort"></i></th>
-                <th class="sortable" onclick="sortAlphaCol(7)">Promotion <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortNumericCol(7)">Moyenne <i class="fas fa-sort"></i></th>
+                <th class="sortable" onclick="sortAlphaCol(8)">Promotion <i class="fas fa-sort"></i></th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                 <td>{{ etudiant.codeNip }}</td>
                 <td>{{ etudiant.nom }}</td>
                 <td>{{ etudiant.prenom }}</td>
+                <td>{{ etudiant.bac }}</td>
                 <td>{{ etudiant.classement }}</td>
                 <td>{{ etudiant.username }}</td>
                 <td>{{ etudiant.moyenne }}</td>

@@ -19,6 +19,121 @@ class CsvReader
         $this->targetDirectory = $targetDirectory;
     }
 
+    public function importDataFromCsv($file, $entityManager)
+    {
+        $champs = $file->getTypeCsv()->getChamps();
+
+        $data = $this->csvToArray($this->getTargetDirectory()."/".$file->getFile());
+
+        $promotion = $file->getPromotion();
+
+        $promotion->removeCsv($file);
+        $entityManager->persist($promotion);
+        $entityManager->remove($file);
+        $entityManager->flush();
+
+        foreach($data as $row)
+        {
+            $etudiant = new Etudiant();
+            foreach($champs as $champ)
+            {
+                
+
+                $etudiant->setPromotion($promotion);
+
+                if($champ->getChampBdd()->getIntitule() == 'bac')
+                {
+                    if($bac = $entityManager->getRepository(Bac::class)->findOneBy(['abreviation' => $row[$champ->getChampCsv()->getIntitule()]]))
+                    {
+                        $bac->addEtudiant($etudiant);
+                    }
+                    else
+                    {
+                        $bac = new Bac();
+                        $bac->setAbreviation($row[$champ->getChampCsv()->getIntitule()]);
+                        $bac->setIntitule($row[$champ->getChampCsv()->getIntitule()]);
+                        $bac->addEtudiant($etudiant);
+                        $entityManager->persist($etudiant);
+                        $entityManager->flush();
+                    }
+                }
+                else
+                {
+                    $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $row[$champ->getChampCsv()->getIntitule()]);
+                }
+            }
+            $entityManager->persist($etudiant);
+        }
+        $entityManager->flush();
+    }
+
+    public function updateDataFromCsv($file, $entityManager)
+    {
+        $data = $this->csvToArray($this->getTargetDirectory()."/".$file->getFile());
+
+        $champs = $file->getTypeCsv()->getChamps();
+
+        $nomPrenom = array();
+        $codeNip = null;
+        $promotion = $file->getPromotion();
+
+        $promotion->removeCsv($file);
+        $entityManager->persist($promotion);
+        $entityManager->remove($file);
+        $entityManager->flush();
+
+        foreach($data as $row)
+        {
+            foreach($champs as $champ)
+            {
+                if($champ->getChampBdd()->getIntitule() == 'codeNip')
+                {
+                    $codeNip = $row[$champ->getChampCsv()->getIntitule()];
+                    dump($codeNip);
+                }
+            }
+            if(isset($codeNip))
+            {
+                foreach($champs as $champ)
+                {
+                    if($etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['codeNip' => $codeNip]))
+                    {
+                        if(!$etudiant->getSpecificField($champ->getChampBdd()->getIntitule()))
+                        {
+                            $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $row[$champ->getChampCsv()->getIntitule()]);
+                            $entityManager->persist($etudiant);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                
+                foreach($champs as $champ)
+                {  
+                    if($champ->getChampBdd()->getIntitule() == 'nom')
+                        $nomPrenom['nom'] = $row[$champ->getChampCsv()->getIntitule()];
+
+                    elseif($champ->getChampBdd() == 'prenom')
+                        $nomPrenom['prenom'] = $row[$champ->getChampCsv()->getIntitule()];
+                }
+                foreach($champs as $champ)
+                {
+                    $etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['nom' => $nomPrenom['nom'], 'prenom' => $nomPrenom['prenom']]);
+                    if(!$etudiant->getSpecificField($champ->getChampBdd()->getIntitule()))
+                    {
+                        $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $champ->getChampCsv()->getIntitule());
+                        $entityManager->persist($etudiant);
+                    }
+                }
+            }
+            
+        }
+        $entityManager->flush();
+    }
+    /**
+     * Useless
+     */
     public function importEtudiantsFromCsv($file, $promotion, $entityManager)
     {
         $data = $this->csvToArray($this->getTargetDirectory()."/".$file->getFile());
@@ -55,7 +170,10 @@ class CsvReader
         $entityManager->flush();
         
     }
-
+    
+    /**
+     * Useless
+     */
     public function updateEtudiantsFromCsv($file, $promotion, $entityManager)
     {
         $data = $this->csvToArray($this->getTargetDirectory()."/".$file->getFile());

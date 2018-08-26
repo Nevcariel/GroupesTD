@@ -396,7 +396,7 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/import/upload/csv/{promotion}", name="admin_import_upload_csv")
+    * @Route("/admin/import/upload/csv/{promotion}", name="admin_old_import_upload_csv")
     */
     public function importUploadCsv(Promotion $promotion, Request $request, FileUploader $fileUploader)
     {
@@ -430,7 +430,7 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/import/csv/{promotion}", name="admin_import_csv")
+    * @Route("/admin/import/csv/{promotion}", name="admin_old_import_csv")
     */
     public function importCsv(Promotion $promotion, Request $request, CsvReader $csvReader)
     {
@@ -482,7 +482,7 @@ class AdminController extends Controller
     }
 
     /**
-    * @Route("/admin/update/csv/{promotion}", name="admin_update_csv")
+    * @Route("/admin/update/csv/{promotion}", name="admin_old_update_csv")
     */
     public function updateCsv(Promotion $promotion, Request $request, CsvReader $csvReader)
     {

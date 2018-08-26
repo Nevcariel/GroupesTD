@@ -24,7 +24,7 @@ class TypeCsv
     private $csvs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AssociationBddCsv", mappedBy="typeCsv")
+     * @ORM\OneToMany(targetEntity="App\Entity\AssociationBddCsv", mappedBy="typeCsv", cascade={"persist"})
      */
     private $champs;
 
@@ -32,6 +32,11 @@ class TypeCsv
     {
         $this->csvs = new ArrayCollection();
         $this->champs = new ArrayCollection();
+    }
+
+    public function __toString(): ?string
+    {
+        return $this->id;
     }
 
     public function getId()
