@@ -24,7 +24,7 @@ class TypeCsv
     private $csvs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AssociationBddCsv", mappedBy="typeCsv", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\AssociationBddCsv", mappedBy="typeCsv", cascade={"persist", "remove"})
      */
     private $champs;
 

@@ -24,7 +24,7 @@ class AssociationBddCsv
     private $champBdd;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ChampCsv", inversedBy="associationsBddCsv", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\ChampCsv", inversedBy="associationsBddCsv", cascade={"persist", "remove"})
      */
     private $champCsv;
 

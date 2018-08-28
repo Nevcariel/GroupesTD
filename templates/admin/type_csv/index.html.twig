@@ -10,6 +10,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nom</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
         {% for type_csv in type_csvs %}
             <tr>
                 <td>{{ type_csv.id }}</td>
+                <td>{{ type_csv.intitule }}</td>
                 <td>
                     <a href="{{ path('admin_type_csv_show', {'id': type_csv.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-eye"></i></a>
                     <a href="{{ path('admin_type_csv_edit', {'id': type_csv.id}) }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-pencil-alt"></i></a>

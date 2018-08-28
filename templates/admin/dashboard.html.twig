@@ -26,8 +26,8 @@
                         <h3>Tables</h3>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_matiere_index') }}">
-                                    Matières
+                                <a class="nav-link" href="{{ path('admin_promotion_index') }}">
+                                    Promotions
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -36,23 +36,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_matiere_index') }}">
+                                    Matières
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ path('admin_enseignant_index') }}">
                                     Enseignants
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_bac_index') }}">
-                                    Bacs
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_groupe_index') }}">
-                                    Groupes
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('admin_promotion_index') }}">
-                                    Promotions
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -65,6 +55,19 @@
                                     Type Csv
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_bac_index') }}">
+                                    Bacs
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('admin_groupe_index') }}">
+                                    Groupes
+                                </a>
+                            </li>
+                        </ul>
+                        <hr/>
+                        <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('admin_champ_csv_index') }}">
                                     Champ Csv
@@ -131,7 +134,6 @@
                                 <td>
                                     <a href="{{ path('admin_promotion_new') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-plus"></i></a>
                                     <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-list-ul"></i></a>
-                                    <a href="{{ path('admin_promotion_index') }}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true"><i class="fas fa-upload"></i></a>
                                 </td>
                             </tr>
                             <tr>

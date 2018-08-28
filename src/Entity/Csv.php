@@ -23,7 +23,7 @@ class Csv
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Selectionnez un fichier csv.")
+     * 
      * @Assert\File(mimeTypes={"text/plain"})
      */
     private $file;

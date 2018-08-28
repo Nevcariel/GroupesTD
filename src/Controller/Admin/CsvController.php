@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Csv;
 use App\Entity\Promotion;
 use App\Form\Admin\CsvType;
+use App\Form\Admin\GenerateCsvType;
 use App\Repository\CsvRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\CsvReader;
 use App\Service\FileUploader;
+use App\Service\FileGenerator;
+use App\Service\CsvWriter;
+use App\Service\FileDeletor;
 
 /**
  * @Route("/admin/csv")
@@ -25,6 +29,44 @@ class CsvController extends Controller
     public function index(CsvRepository $csvRepository): Response
     {
         return $this->render('admin/csv/index.html.twig', ['csvs' => $csvRepository->findAll()]);
+    }
+
+    /**
+     * @Route("/new", name="admin_csv_new")
+     */
+    public function new(FileGenerator $fileGenerator, Request $request): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $csv = new Csv();
+        $form = $this->createForm(GenerateCsvType::class, $csv);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $csv->setFile($fileGenerator->generate($csv));
+            $csv->setName($csv->getPromotion()->getAnneeDebut().'_'.$csv->getPromotion()->getAnneeFin());
+
+            $entityManager->persist($csv);
+            $entityManager->flush();
+            
+            return $this->redirectToRoute('admin_csv_generate', [
+                'id' => $csv->getId(),
+            ]);
+        }
+
+        return $this->render('admin/csv/generate.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/generate/{id}", name="admin_csv_generate")
+     */
+    public function generateNew(Csv $csv, CsvWriter $csvWriter): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $path = $csvWriter->bddToCsv($csv, $entityManager);
+
+        return $this->redirectToRoute('admin_promotion_index');
     }
 
     /**
@@ -135,56 +177,6 @@ class CsvController extends Controller
     }
 
     /**
-    * @Route("/export/{id}", name="admin_export_csv")
-    */
-    public function exportCsv(Promotion $promotion, Request $request)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $csv = new Csv();
-
-        $csv->setPromotion($promotion);
-        $csv->setName($promotion->getAnneeDebut().'_'.$promotion->getAnneFin());
-
-
-        return $this->redirectToRoute('admin_etudiant_index', array(
-        ));
-    }
-
-    /**
-    * @Route("/generate/{id}", name="admin_generate_csv")
-    */
-    public function generateCsv(Promotion $promotion, Request $request)
-    {
-        $champs = $csv->getTypeCsv()->getChamps();
-        $header = array();
-        $datas = array();
-        $row = array();
-        foreach($champs as $champ)
-        {
-            array_push($header, $champ->getChampCsv()->getIntitule());
-        }
-        $etudiants = $entityManager->getRepository(Etudiant::class)->findBy(['promotion' => $promotion]);
-        foreach($etudiants as $etudiant)
-        {
-            foreach($champs as $champ)
-            {
-                array_push($row, getSpecificField($champ->getChampBdd->getIntitule()));
-            }
-            $datas[] = array_combine($header, $row);
-            $row = array();
-        }
-        $p = fopen($this->getTargetDirectory().'/'.$csv->getPromotion()->getAnneeDebut().'_'.$promotion->getPromotion()->getAnneeFin(), 'w');
-        foreach($datas as $data)
-        {
-            fputcsv($p, $data, ";");
-        }
-        fclose($p);
-
-        return $csv;
-    }
-
-    /**
      * @Route("/{id}", name="admin_csv_show", methods="GET")
      */
     public function show(Csv $csv): Response
@@ -215,10 +207,11 @@ class CsvController extends Controller
     /**
      * @Route("/{id}", name="admin_csv_delete", methods="DELETE")
      */
-    public function delete(Request $request, Csv $csv): Response
+    public function delete(Request $request, Csv $csv, FileDeletor $fileDeletor): Response
     {
         if ($this->isCsrfTokenValid('delete'.$csv->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
+            $fileDeletor->delete($csv);
             $em->remove($csv);
             $em->flush();
         }

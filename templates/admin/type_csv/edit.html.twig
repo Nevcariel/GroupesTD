@@ -13,3 +13,8 @@
     {{ include('admin/type_csv/_delete_form.html.twig') }}
 </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/collections.js') }}"></script>
+{% endblock %}

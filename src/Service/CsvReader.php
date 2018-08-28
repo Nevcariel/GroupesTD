@@ -98,25 +98,20 @@ class CsvReader
                 {
                     $codeNip = $row[$champ->getChampCsv()->getIntitule()];
                 }
-                dump($codeNip);
             }
-            if(isset($codeNip))
+            if(isset($codeNip) && $etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['codeNip' => $codeNip, 'promotion' => $promotion]))
             {
                 foreach($champs as $champ)
                 {
-                    if($etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['codeNip' => $codeNip]))
+                    if(!$etudiant->getSpecificField($champ->getChampBdd()->getIntitule()))
                     {
-                        if(!$etudiant->getSpecificField($champ->getChampBdd()->getIntitule()))
-                        {
-                            $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $row[$champ->getChampCsv()->getIntitule()]);
-                            $entityManager->persist($etudiant);
-                        }
+                        $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $row[$champ->getChampCsv()->getIntitule()]);
+                        $entityManager->persist($etudiant);
                     }
                 }
             }
             else
             {
-                dump($codeNip);
                 foreach($champs as $champ)
                 {  
                     if($champ->getChampBdd()->getIntitule() == 'nom')
@@ -125,13 +120,16 @@ class CsvReader
                     elseif($champ->getChampBdd() == 'prenom')
                         $nomPrenom['prenom'] = $row[$champ->getChampCsv()->getIntitule()];
                 }
-                foreach($champs as $champ)
+                $etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['nom' => $nomPrenom['nom'], 'prenom' => $nomPrenom['prenom'], 'promotion' => $promotion]);
+                if(isset($etudiant))
                 {
-                    $etudiant = $entityManager->getRepository(Etudiant::class)->findOneBy(['nom' => $nomPrenom['nom'], 'prenom' => $nomPrenom['prenom']]);
-                    if(!$etudiant->getSpecificField($champ->getChampBdd()->getIntitule()))
+                    foreach($champs as $champ)
                     {
-                        $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $champ->getChampCsv()->getIntitule());
-                        $entityManager->persist($etudiant);
+                        if(!$etudiant->getSpecificField($champ->getChampBdd()->getIntitule()))
+                        {
+                            $etudiant->setSpecificField($champ->getChampBdd()->getIntitule(), $row[$champ->getChampCsv()->getIntitule()]);
+                            $entityManager->persist($etudiant);
+                        }
                     }
                 }
                 foreach($champs as $champ)
