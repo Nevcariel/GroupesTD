@@ -140,7 +140,7 @@ l3_cas:
 
 - Télécharger l'archive et la dézipper
 
-- OU
+ou
 
 - Se positionner dans le répertoire de destination et utiliser la commande : 
 
@@ -172,7 +172,7 @@ php bin/console server:run
 
 ## Utilisation
 
-- [Guide d'utilisation de l'application] ()
+- [Guide d'utilisation de l'application] (guide_utilisation.pdf)
 
 
 ## Auteur

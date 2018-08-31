@@ -11,8 +11,6 @@ security:
                 users:
                     g21707397:
                         roles: 'ROLE_ADMIN'
-                    [votre login]:
-                        roles: 'ROLE_ADMIN'
         bdd_etudiant:
             entity:
                 class: App\Entity\Etudiant
