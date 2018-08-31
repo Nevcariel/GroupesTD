@@ -172,7 +172,7 @@ php bin/console server:run
 
 ## Utilisation
 
-- [Guide d'utilisation de l'application] (./guide_utilisation.pdf)
+[Guide d'utilisation de l'application] (docs/guide_utilisation.pdf)
 
 
 ## Auteur
